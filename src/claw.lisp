@@ -1,8 +1,6 @@
 (cl:defpackage :physx
   (:use :cl)
   (:export))
-(uiop:define-package :%physx
-  (:use))
 
 (cl:in-package :physx)
 
@@ -26,11 +24,16 @@
 
 
 (claw.wrapper:defwrapper (physx::claw-physx
+                          (:system :claw-physx/wrapper)
                           (:headers "PxPhysicsAPI.h")
                           (:defines "_DEBUG" 1)
                           (:includes :physx-shared-includes :physx-includes)
-                          (:targets :local)
-                          (:persistent nil)
+                          (:targets ((:and :x86-64 :linux) "x86_64-pc-linux-gnu")
+                                    ((:and :aarch64 :android) "aarch64-linux-android"))
+                          (:persistent :claw-physx-bindings
+                           :asd-path "../claw-physx-bindings.asd"
+                           :bindings-path "../bindings/"
+                           :depends-on (:claw-utils))
                           (:language :c++)
                           (:include-definitions "physx::.*" "Px.*")
                           (:exclude-definitions "physx::PxVehicleDrive"
@@ -41,6 +44,6 @@
   :recognize-strings t
   :with-adapter (:static
                  :extract-pointers ("PxDefaultSimulationFilterShader")
-                 :path "lib/adapter.c")
+                 :path "lib/adapter.cxx")
   :override-types ((:string claw-utils:claw-string)
                    (:pointer claw-utils:claw-pointer)))
