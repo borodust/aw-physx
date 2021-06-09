@@ -2,6 +2,28 @@
 (uiop:define-package :claw-physx-bindings~pristine (:use :cl))
 (common-lisp:in-package :claw-physx-bindings~pristine)
 
+(defparameter %physx::+physx+invalid-filter-pair-index+ 4294967295)
+
+(defparameter %physx::+physx+no-link+ 65535)
+
+(defparameter %physx::+physx+px-default-client+ 0)
+
+(defparameter %physx::+physx+px-max-clients+ 128)
+
+(defparameter %physx::+physx+px-half-pi+ 1.5707963705062866D0)
+
+(defparameter %physx::+physx+px-inv-pi+ 0.31830987334251404D0)
+
+(defparameter %physx::+physx+px-inv-two-pi+ 0.15915493667125702D0)
+
+(defparameter %physx::+physx+px-pi+ 3.1415927410125732D0)
+
+(defparameter %physx::+physx+px-pi-div-four+ 0.7853981852531433D0)
+
+(defparameter %physx::+physx+px-pi-div-two+ 1.5707963705062866D0)
+
+(defparameter %physx::+physx+px-two-pi+ 6.2831854820251465D0)
+
 (iffi:defitype %physx::physx+px-u32
                :unsigned-int
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxSimpleTypes.h:71:18")
@@ -168,61 +190,6 @@
                %physx::physx+px-flags<physx+px-mesh-preprocessing-flag+enum+unsigned+int>
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:167:54")
 
-(iffi:defitype %physx::physx+px-f32
-               :float
-               "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxSimpleTypes.h:76:15")
-
-(cffi:defcenum (%physx::physx+px-mesh-cooking-hint+enum
-                :unsigned-int)
-               "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:48:7"
-               (:sim-performance 0)
-               (:cooking-performance 1))
-
-(iffi:defistruct (%physx::physx+px-bvh33midphase-desc
-                   :size-reporter
-                   "__claw_sizeof_physx_PxBVH33MidphaseDesc"
-                   :alignment-reporter
-                   "__claw_alignof_physx_PxBVH33MidphaseDesc"
-                   :constructor
-                   %physx::physx+px-bvh33midphase-desc
-                   :destructor
-                   %physx::physx+~px-bvh33midphase-desc)
-                 nil
-                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:61:8"
-                 (%physx::mesh-size-performance-trade-off
-                  %physx::physx+px-f32 :setter
-                  "__claw_set_physx_PxBVH33MidphaseDesc_meshSizePerformanceTradeOff"
-                  :getter
-                  "__claw_get_physx_PxBVH33MidphaseDesc_meshSizePerformanceTradeOff"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:74:14")
-                 (%physx::mesh-cooking-hint
-                  %physx::physx+px-mesh-cooking-hint+enum :setter
-                  "__claw_set_physx_PxBVH33MidphaseDesc_meshCookingHint"
-                  :getter
-                  "__claw_get_physx_PxBVH33MidphaseDesc_meshCookingHint"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:81:28"))
-
-(iffi:defistruct (%physx::physx+px-bvh34midphase-desc
-                   :size-reporter
-                   "__claw_sizeof_physx_PxBVH34MidphaseDesc"
-                   :alignment-reporter
-                   "__claw_alignof_physx_PxBVH34MidphaseDesc"
-                   :constructor
-                   %physx::physx+px-bvh34midphase-desc
-                   :destructor
-                   %physx::physx+~px-bvh34midphase-desc)
-                 nil
-                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH34MidphaseDesc.h:51:8"
-                 (%physx::num-prims-per-leaf %physx::physx+px-u32
-                  :setter
-                  "__claw_set_physx_PxBVH34MidphaseDesc_numPrimsPerLeaf"
-                  :getter
-                  "__claw_get_physx_PxBVH34MidphaseDesc_numPrimsPerLeaf"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH34MidphaseDesc.h:62:10"))
-
 (iffi:deficlass (%physx::physx+px-midphase-desc
                   :size-reporter
                   "__claw_sizeof_physx_PxMidphaseDesc"
@@ -339,15 +306,6 @@
                 nil
                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:208:7")
 
-(iffi:defistruct (%physx::c-uctx-st :size-reporter nil
-                  :alignment-reporter nil)
-                 nil
-                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:43:16")
-
-(iffi:defitype %physx::c-ucontext
-               (:pointer %physx::c-uctx-st)
-               "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:43:26")
-
 (cffi:defcenum (%physx::physx+px-cuda-interop-mode+enum
                 :unsigned-int)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:56:7"
@@ -372,12 +330,6 @@
                   %physx::physx+~px-cuda-context-manager-desc)
                 nil
                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:88:7"
-                (%physx::ctx (:pointer %physx::c-ucontext) :setter
-                 "__claw_set_physx_PxCudaContextManagerDesc_ctx"
-                 :getter
-                 "__claw_get_physx_PxCudaContextManagerDesc_ctx"
-                 :documentation
-                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:112:24")
                 (%physx::graphics-device (:pointer :void) :setter
                  "__claw_set_physx_PxCudaContextManagerDesc_graphicsDevice"
                  :getter
@@ -1980,6 +1932,10 @@
                (:pointer %physx::physx+px-vehicle-wheels))
               (%physx::trg
                (:pointer %physx::physx+px-vehicle-wheels)))
+
+(iffi:defitype %physx::physx+px-f32
+               :float
+               "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxSimpleTypes.h:76:15")
 
 (iffi:deficlass (%physx::physx+px-contact-set
                   :size-reporter
@@ -4708,7 +4664,7 @@
 
 (iffi:defitype %physx::size-t
                :unsigned-long
-               "/usr/lib/clang/11.0.1/include/stddef.h:46:23")
+               "/usr/lib/clang/11.1.0/include/stddef.h:46:23")
 
 (iffi:defifun ("__claw__ZN5physx20platformAlignedAllocEm"
                %physx::physx+platform-aligned-alloc)
@@ -4847,14 +4803,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40NE40GuE40SE40ContactPoint_claw_ctor"
                %physx::physx+gu+contact-point)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geomutils/GuContactPoint.h:44:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+gu+contact-point)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40NE40GuE40SE40ContactPoint_claw_dtor"
                %physx::physx+gu+~contact-point)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geomutils/GuContactPoint.h:44:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+gu+contact-point)))
 
@@ -5121,21 +5077,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40Px1DConstraintFlag_claw_dtor"
                %physx::physx+~px1d-constraint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:67:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px1d-constraint-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40Px1DConstraint_claw_ctor"
                %physx::physx+px1d-constraint)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:141:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px1d-constraint)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40Px1DConstraint_claw_dtor"
                %physx::physx+~px1d-constraint)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:141:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px1d-constraint)))
 
@@ -5312,14 +5268,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxActorFlag_claw_ctor"
                %physx::physx+px-actor-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxActor.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-actor-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxActorFlag_claw_dtor"
                %physx::physx+~px-actor-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxActor.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-actor-flag)))
 
@@ -5365,7 +5321,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxActorShape_claw_dtor"
                %physx::physx+~px-actor-shape)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:104:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-actor-shape)))
 
@@ -5396,28 +5352,28 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxActorTypeFlag_claw_ctor"
                %physx::physx+px-actor-type-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxScene.h:99:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-actor-type-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxActorTypeFlag_claw_dtor"
                %physx::physx+~px-actor-type-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxScene.h:99:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-actor-type-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxActorType_claw_ctor"
                %physx::physx+px-actor-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxActor.h:119:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-actor-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxActorType_claw_dtor"
                %physx::physx+~px-actor-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxActor.h:119:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-actor-type)))
 
@@ -5587,28 +5543,28 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxAllocIdStats_claw_ctor"
                %physx::physx+px-alloc-id-stats)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:140:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-alloc-id-stats)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxAllocIdStats_claw_dtor"
                %physx::physx+~px-alloc-id-stats)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:140:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-alloc-id-stats)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxAllocId_claw_ctor"
                %physx::physx+px-alloc-id)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:57:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-alloc-id)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxAllocId_claw_dtor"
                %physx::physx+~px-alloc-id)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:57:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-alloc-id)))
 
@@ -5673,7 +5629,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxAllocInfo_claw_dtor"
                %physx::physx+~px-alloc-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:90:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-alloc-info)))
 
@@ -5870,14 +5826,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationAxis_claw_ctor"
                %physx::physx+px-articulation-axis)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:237:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-axis)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationAxis_claw_dtor"
                %physx::physx+~px-articulation-axis)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:237:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-axis)))
 
@@ -6327,7 +6283,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationCache_claw_dtor"
                %physx::physx+~px-articulation-cache)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationReducedCoordinate.h:77:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-cache)))
 
@@ -6381,7 +6337,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationDriveCache_claw_dtor"
                %physx::physx+~px-articulation-drive-cache)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulation.h:53:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-drive-cache)))
 
@@ -6400,28 +6356,28 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationDriveType_claw_ctor"
                %physx::physx+px-articulation-drive-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:290:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-drive-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationDriveType_claw_dtor"
                %physx::physx+~px-articulation-drive-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:290:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-drive-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationDrive_claw_ctor"
                %physx::physx+px-articulation-drive)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:307:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-drive)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationDrive_claw_dtor"
                %physx::physx+~px-articulation-drive)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:307:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-drive)))
 
@@ -6440,14 +6396,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationFlag_claw_ctor"
                %physx::physx+px-articulation-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:278:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationFlag_claw_dtor"
                %physx::physx+~px-articulation-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:278:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-flag)))
 
@@ -6794,7 +6750,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationJointDriveType_claw_ctor"
                %physx::physx+px-articulation-joint-drive-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationJoint.h:60:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-articulation-joint-drive-type)))
@@ -6802,7 +6758,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationJointDriveType_claw_dtor"
                %physx::physx+~px-articulation-joint-drive-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationJoint.h:60:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-articulation-joint-drive-type)))
@@ -7009,14 +6965,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationJointType_claw_ctor"
                %physx::physx+px-articulation-joint-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:266:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-joint-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationJointType_claw_dtor"
                %physx::physx+~px-articulation-joint-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:266:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-joint-type)))
 
@@ -7045,14 +7001,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationLimit_claw_ctor"
                %physx::physx+px-articulation-limit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:302:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-limit)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationLimit_claw_dtor"
                %physx::physx+~px-articulation-limit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:302:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-limit)))
 
@@ -7132,14 +7088,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationMotion_claw_ctor"
                %physx::physx+px-articulation-motion)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:253:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-motion)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationMotion_claw_dtor"
                %physx::physx+~px-articulation-motion)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:253:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-articulation-motion)))
 
@@ -7479,7 +7435,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationRootLinkData_claw_ctor"
                %physx::physx+px-articulation-root-link-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationReducedCoordinate.h:68:9"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-articulation-root-link-data)))
@@ -7487,7 +7443,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxArticulationRootLinkData_claw_dtor"
                %physx::physx+~px-articulation-root-link-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationReducedCoordinate.h:68:9"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-articulation-root-link-data)))
@@ -7502,6 +7458,38 @@
               (%physx::file claw-utils:claw-string)
               (%physx::line :int)
               (%physx::ignore (:pointer :bool)))
+
+(cffi:defcenum (%physx::physx+px-mesh-cooking-hint+enum
+                :unsigned-int)
+               "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:48:7"
+               (:sim-performance 0)
+               (:cooking-performance 1))
+
+(iffi:defistruct (%physx::physx+px-bvh33midphase-desc
+                   :size-reporter
+                   "__claw_sizeof_physx_PxBVH33MidphaseDesc"
+                   :alignment-reporter
+                   "__claw_alignof_physx_PxBVH33MidphaseDesc"
+                   :constructor
+                   %physx::physx+px-bvh33midphase-desc
+                   :destructor
+                   %physx::physx+~px-bvh33midphase-desc)
+                 nil
+                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:61:8"
+                 (%physx::mesh-size-performance-trade-off
+                  %physx::physx+px-f32 :setter
+                  "__claw_set_physx_PxBVH33MidphaseDesc_meshSizePerformanceTradeOff"
+                  :getter
+                  "__claw_get_physx_PxBVH33MidphaseDesc_meshSizePerformanceTradeOff"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:74:14")
+                 (%physx::mesh-cooking-hint
+                  %physx::physx+px-mesh-cooking-hint+enum :setter
+                  "__claw_set_physx_PxBVH33MidphaseDesc_meshCookingHint"
+                  :getter
+                  "__claw_get_physx_PxBVH33MidphaseDesc_meshCookingHint"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:81:28"))
 
 (iffi:defifun ("__claw__ZNK5physx19PxBVH33MidphaseDesc7isValidEv"
                %physx::physx+is-valid :non-mutating t)
@@ -7520,14 +7508,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBVH33MidphaseDesc_claw_ctor"
                %physx::physx+px-bvh33midphase-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:61:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-bvh33midphase-desc)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBVH33MidphaseDesc_claw_dtor"
                %physx::physx+~px-bvh33midphase-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:61:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-bvh33midphase-desc)))
 
@@ -7537,6 +7525,25 @@
                  "__claw_alignof_physx_PxBVH33TriangleMesh")
                 nil
                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMesh.h:286:7")
+
+(iffi:defistruct (%physx::physx+px-bvh34midphase-desc
+                   :size-reporter
+                   "__claw_sizeof_physx_PxBVH34MidphaseDesc"
+                   :alignment-reporter
+                   "__claw_alignof_physx_PxBVH34MidphaseDesc"
+                   :constructor
+                   %physx::physx+px-bvh34midphase-desc
+                   :destructor
+                   %physx::physx+~px-bvh34midphase-desc)
+                 nil
+                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH34MidphaseDesc.h:51:8"
+                 (%physx::num-prims-per-leaf %physx::physx+px-u32
+                  :setter
+                  "__claw_set_physx_PxBVH34MidphaseDesc_numPrimsPerLeaf"
+                  :getter
+                  "__claw_get_physx_PxBVH34MidphaseDesc_numPrimsPerLeaf"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH34MidphaseDesc.h:62:10"))
 
 (iffi:defifun ("__claw__ZNK5physx19PxBVH34MidphaseDesc7isValidEv"
                %physx::physx+is-valid :non-mutating t)
@@ -7555,14 +7562,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBVH34MidphaseDesc_claw_ctor"
                %physx::physx+px-bvh34midphase-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH34MidphaseDesc.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-bvh34midphase-desc)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBVH34MidphaseDesc_claw_dtor"
                %physx::physx+~px-bvh34midphase-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH34MidphaseDesc.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-bvh34midphase-desc)))
 
@@ -7687,7 +7694,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBVHStructureDesc_claw_dtor"
                %physx::physx+~px-bvh-structure-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVHStructureDesc.h:53:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-bvh-structure-desc)))
 
@@ -7762,14 +7769,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBaseFlag_claw_ctor"
                %physx::physx+px-base-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxBase.h:54:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-base-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBaseFlag_claw_dtor"
                %physx::physx+~px-base-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxBase.h:54:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-base-flag)))
 
@@ -7877,7 +7884,7 @@
                (:pointer %physx::physx+px-batch-query)))
 
 (iffi:defitype %physx::physx+px-batch-query-post-filter-shader
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryFiltering.h:266:46")
 
 (iffi:defifun ("__claw__ZNK5physx12PxBatchQuery19getPostFilterShaderEv"
@@ -7888,7 +7895,7 @@
                (:pointer %physx::physx+px-batch-query)))
 
 (iffi:defitype %physx::physx+px-batch-query-pre-filter-shader
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryFiltering.h:233:46")
 
 (iffi:defifun ("__claw__ZNK5physx12PxBatchQuery18getPreFilterShaderEv"
@@ -8256,7 +8263,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryDesc_claw_dtor"
                %physx::physx+~px-batch-query-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:217:21"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-batch-query-desc)))
 
@@ -8300,7 +8307,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryMemory_claw_dtor"
                %physx::physx+~px-batch-query-memory)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:117:22"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-batch-query-memory)))
 
@@ -8324,7 +8331,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryResultE3EE23E24E40NE40physxE40SE40PxOverlapHit_claw_ctor"
                %physx::physx+px-batch-query-result<physx+px-overlap-hit>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:82:22"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-batch-query-result<physx+px-overlap-hit>)))
@@ -8332,7 +8339,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryResultE3EE23E24E40NE40physxE40SE40PxOverlapHit_claw_dtor"
                %physx::physx+~px-batch-query-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:82:22"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-batch-query-result<physx+px-overlap-hit>)))
@@ -8357,7 +8364,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryResultE3EE23E24E40NE40physxE40SE40PxRaycastHit_claw_ctor"
                %physx::physx+px-batch-query-result<physx+px-raycast-hit>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:82:22"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-batch-query-result<physx+px-raycast-hit>)))
@@ -8365,7 +8372,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryResultE3EE23E24E40NE40physxE40SE40PxRaycastHit_claw_dtor"
                %physx::physx+~px-batch-query-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:82:22"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-batch-query-result<physx+px-raycast-hit>)))
@@ -8390,7 +8397,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryResultE3EE23E24E40NE40physxE40SE40PxSweepHit_claw_ctor"
                %physx::physx+px-batch-query-result<physx+px-sweep-hit>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:82:22"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-batch-query-result<physx+px-sweep-hit>)))
@@ -8398,7 +8405,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryResultE3EE23E24E40NE40physxE40SE40PxSweepHit_claw_dtor"
                %physx::physx+~px-batch-query-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:82:22"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-batch-query-result<physx+px-sweep-hit>)))
@@ -8425,14 +8432,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryStatus_claw_ctor"
                %physx::physx+px-batch-query-status)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:55:22"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-batch-query-status)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBatchQueryStatus_claw_dtor"
                %physx::physx+~px-batch-query-status)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBatchQueryDesc.h:55:22"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-batch-query-status)))
 
@@ -8584,7 +8591,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBitAndDataTE3EE23cE23Vc128_claw_dtor"
                %physx::physx+~px-bit-and-data-t)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxBitAndData.h:44:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::|PHYSX+PX-BIT-AND-DATA-T<UNSIGNED+CHAR+'\\X80'>|)))
@@ -8663,7 +8670,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBitAndDataTE3EE23iE23Vi2147483648_claw_dtor"
                %physx::physx+~px-bit-and-data-t)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxBitAndData.h:44:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-bit-and-data-t<unsigned+int+2147483648>)))
@@ -8742,7 +8749,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBitAndDataTE3EE23sE23Vs32768_claw_dtor"
                %physx::physx+~px-bit-and-data-t)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxBitAndData.h:44:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-bit-and-data-t<unsigned+short+32768>)))
@@ -8757,7 +8764,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBoundedData_claw_dtor"
                %physx::physx+~px-bounded-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxCoreUtilityTypes.h:83:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-bounded-data)))
 
@@ -9021,7 +9028,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBounds3_claw_dtor"
                %physx::physx+~px-bounds3)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxBounds3.h:58:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-bounds3)))
 
@@ -9209,7 +9216,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBoxGeometry_claw_dtor"
                %physx::physx+~px-box-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxBoxGeometry.h:50:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-box-geometry)))
 
@@ -9242,7 +9249,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBoxObstacle_claw_dtor"
                %physx::physx+~px-box-obstacle)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxControllerObstacles.h:78:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-box-obstacle)))
 
@@ -9304,14 +9311,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseCaps_claw_ctor"
                %physx::physx+px-broad-phase-caps)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:162:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-caps)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseCaps_claw_dtor"
                %physx::physx+~px-broad-phase-caps)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:162:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-caps)))
 
@@ -9340,14 +9347,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseExt_claw_ctor"
                %physx::physx+px-broad-phase-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxBroadPhaseExt.h:45:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-ext)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseExt_claw_dtor"
                %physx::physx+~px-broad-phase-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxBroadPhaseExt.h:45:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-ext)))
 
@@ -9425,28 +9432,28 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseRegionInfo_claw_ctor"
                %physx::physx+px-broad-phase-region-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:150:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-region-info)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseRegionInfo_claw_dtor"
                %physx::physx+~px-broad-phase-region-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:150:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-region-info)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseRegion_claw_ctor"
                %physx::physx+px-broad-phase-region)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:141:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-region)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseRegion_claw_dtor"
                %physx::physx+~px-broad-phase-region)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:141:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-region)))
 
@@ -9473,14 +9480,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseType_claw_ctor"
                %physx::physx+px-broad-phase-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:66:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxBroadPhaseType_claw_dtor"
                %physx::physx+~px-broad-phase-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxBroadPhase.h:66:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-broad-phase-type)))
 
@@ -9525,14 +9532,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCapsuleClimbingMode_claw_ctor"
                %physx::physx+px-capsule-climbing-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxCapsuleController.h:44:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-capsule-climbing-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCapsuleClimbingMode_claw_dtor"
                %physx::physx+~px-capsule-climbing-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxCapsuleController.h:44:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-capsule-climbing-mode)))
 
@@ -9715,7 +9722,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCapsuleGeometry_claw_dtor"
                %physx::physx+~px-capsule-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxCapsuleGeometry.h:55:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-capsule-geometry)))
 
@@ -9752,7 +9759,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCapsuleObstacle_claw_dtor"
                %physx::physx+~px-capsule-obstacle)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxControllerObstacles.h:93:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-capsule-obstacle)))
 
@@ -9907,14 +9914,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCombineMode_claw_ctor"
                %physx::physx+px-combine-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxMaterial.h:125:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-combine-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCombineMode_claw_dtor"
                %physx::physx+~px-combine-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxMaterial.h:125:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-combine-mode)))
 
@@ -9958,14 +9965,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConcreteType_claw_ctor"
                %physx::physx+px-concrete-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-concrete-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConcreteType_claw_dtor"
                %physx::physx+~px-concrete-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-concrete-type)))
 
@@ -10097,15 +10104,15 @@
                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:352:7")
 
 (iffi:defitype %physx::physx+px-constraint-solver-prep
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:228:17")
 
 (iffi:defitype %physx::physx+px-constraint-project
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:249:16")
 
 (iffi:defitype %physx::physx+px-constraint-visualize
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:325:16")
 
 (iffi:defistruct (%physx::physx+px-constraint-shader-table
@@ -10242,14 +10249,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintBatchHeader_claw_ctor"
                %physx::physx+px-constraint-batch-header)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:104:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-batch-header)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintBatchHeader_claw_dtor"
                %physx::physx+~px-constraint-batch-header)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:104:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-batch-header)))
 
@@ -10360,14 +10367,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintExtIDs_claw_ctor"
                %physx::physx+px-constraint-ext-i-ds)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxConstraintExt.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-ext-i-ds)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintExtIDs_claw_dtor"
                %physx::physx+~px-constraint-ext-i-ds)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxConstraintExt.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-ext-i-ds)))
 
@@ -10386,14 +10393,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintFlag_claw_ctor"
                %physx::physx+px-constraint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraint.h:62:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintFlag_claw_dtor"
                %physx::physx+~px-constraint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraint.h:62:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-flag)))
 
@@ -10447,7 +10454,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintInfo_claw_dtor"
                %physx::physx+~px-constraint-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:766:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-info)))
 
@@ -10508,21 +10515,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintInvMassScale_claw_dtor"
                %physx::physx+~px-constraint-inv-mass-scale)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:189:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-inv-mass-scale)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintShaderTable_claw_ctor"
                %physx::physx+px-constraint-shader-table)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraint.h:88:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-shader-table)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintShaderTable_claw_dtor"
                %physx::physx+~px-constraint-shader-table)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraint.h:88:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-shader-table)))
 
@@ -10554,14 +10561,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintSolveHint_claw_ctor"
                %physx::physx+px-constraint-solve-hint)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:90:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-solve-hint)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintSolveHint_claw_dtor"
                %physx::physx+~px-constraint-solve-hint)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:90:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-constraint-solve-hint)))
 
@@ -10586,7 +10593,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintVisualizationFlag_claw_ctor"
                %physx::physx+px-constraint-visualization-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:179:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-constraint-visualization-flag)))
@@ -10594,7 +10601,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConstraintVisualizationFlag_claw_dtor"
                %physx::physx+~px-constraint-visualization-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:179:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-constraint-visualization-flag)))
@@ -10847,14 +10854,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactModifyPair_claw_ctor"
                %physx::physx+px-contact-modify-pair)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContactModifyCallback.h:367:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-modify-pair)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactModifyPair_claw_dtor"
                %physx::physx+~px-contact-modify-pair)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContactModifyCallback.h:367:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-modify-pair)))
 
@@ -11060,7 +11067,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairExtraDataItem_claw_dtor"
                %physx::physx+~px-contact-pair-extra-data-item)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:78:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-contact-pair-extra-data-item)))
@@ -11185,7 +11192,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairExtraDataIterator_claw_dtor"
                %physx::physx+~px-contact-pair-extra-data-iterator)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:177:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-contact-pair-extra-data-iterator)))
@@ -11213,7 +11220,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairExtraDataType_claw_ctor"
                %physx::physx+px-contact-pair-extra-data-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:61:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-contact-pair-extra-data-type)))
@@ -11221,7 +11228,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairExtraDataType_claw_dtor"
                %physx::physx+~px-contact-pair-extra-data-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:61:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-contact-pair-extra-data-type)))
@@ -11241,14 +11248,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairFlag_claw_ctor"
                %physx::physx+px-contact-pair-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:404:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairFlag_claw_dtor"
                %physx::physx+~px-contact-pair-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:404:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-flag)))
 
@@ -11332,21 +11339,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairHeaderFlag_claw_ctor"
                %physx::physx+px-contact-pair-header-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:324:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-header-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairHeaderFlag_claw_dtor"
                %physx::physx+~px-contact-pair-header-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:324:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-header-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairHeader_claw_dtor"
                %physx::physx+~px-contact-pair-header)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:347:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-header)))
 
@@ -11377,21 +11384,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairIndex_claw_dtor"
                %physx::physx+~px-contact-pair-index)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:160:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-index)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairPoint_claw_ctor"
                %physx::physx+px-contact-pair-point)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:463:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-point)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairPoint_claw_dtor"
                %physx::physx+~px-contact-pair-point)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:463:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-point)))
 
@@ -11405,7 +11412,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairPose_claw_dtor"
                %physx::physx+~px-contact-pair-pose)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:123:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-pose)))
 
@@ -11419,14 +11426,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPairVelocity_claw_dtor"
                %physx::physx+~px-contact-pair-velocity)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:101:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair-velocity)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPair_claw_dtor"
                %physx::physx+~px-contact-pair)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:505:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-pair)))
 
@@ -11569,14 +11576,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPatch_claw_ctor"
                %physx::physx+px-contact-patch)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-patch)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactPatch_claw_dtor"
                %physx::physx+~px-contact-patch)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-patch)))
 
@@ -11810,14 +11817,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactSet_claw_ctor"
                %physx::physx+px-contact-set)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContactModifyCallback.h:61:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-set)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactSet_claw_dtor"
                %physx::physx+~px-contact-set)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContactModifyCallback.h:61:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-set)))
 
@@ -12122,21 +12129,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContactStreamIterator_claw_dtor"
                %physx::physx+~px-contact-stream-iterator)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:178:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact-stream-iterator)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContact_claw_ctor"
                %physx::physx+px-contact)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:108:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxContact_claw_dtor"
                %physx::physx+~px-contact)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:108:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-contact)))
 
@@ -12626,14 +12633,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerBehaviorFlag_claw_ctor"
                %physx::physx+px-controller-behavior-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxControllerBehavior.h:50:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-behavior-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerBehaviorFlag_claw_dtor"
                %physx::physx+~px-controller-behavior-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxControllerBehavior.h:50:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-behavior-flag)))
 
@@ -12652,14 +12659,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerCollisionFlag_claw_ctor"
                %physx::physx+px-controller-collision-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:99:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-collision-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerCollisionFlag_claw_dtor"
                %physx::physx+~px-controller-collision-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:99:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-collision-flag)))
 
@@ -12678,7 +12685,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerDebugRenderFlag_claw_ctor"
                %physx::physx+px-controller-debug-render-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxControllerManager.h:57:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-controller-debug-render-flag)))
@@ -12686,7 +12693,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerDebugRenderFlag_claw_dtor"
                %physx::physx+~px-controller-debug-render-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxControllerManager.h:57:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-controller-debug-render-flag)))
@@ -12851,7 +12858,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerFilters_claw_dtor"
                %physx::physx+~px-controller-filters)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:275:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-filters)))
 
@@ -12900,14 +12907,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerHit_claw_ctor"
                %physx::physx+px-controller-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:146:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-hit)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerHit_claw_dtor"
                %physx::physx+~px-controller-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:146:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-hit)))
 
@@ -13074,7 +13081,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerNonWalkableMode_claw_ctor"
                %physx::physx+px-controller-non-walkable-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:87:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-controller-non-walkable-mode)))
@@ -13082,7 +13089,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerNonWalkableMode_claw_dtor"
                %physx::physx+~px-controller-non-walkable-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:87:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-controller-non-walkable-mode)))
@@ -13108,14 +13115,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerObstacleHit_claw_ctor"
                %physx::physx+px-controller-obstacle-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:182:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-obstacle-hit)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerObstacleHit_claw_dtor"
                %physx::physx+~px-controller-obstacle-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:182:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-obstacle-hit)))
 
@@ -13154,14 +13161,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerShapeHit_claw_ctor"
                %physx::physx+px-controller-shape-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:160:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-shape-hit)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerShapeHit_claw_dtor"
                %physx::physx+~px-controller-shape-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:160:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-shape-hit)))
 
@@ -13180,42 +13187,42 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerShapeType_claw_ctor"
                %physx::physx+px-controller-shape-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:49:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-shape-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerShapeType_claw_dtor"
                %physx::physx+~px-controller-shape-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:49:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-shape-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerState_claw_ctor"
                %physx::physx+px-controller-state)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:120:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-state)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerState_claw_dtor"
                %physx::physx+~px-controller-state)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:120:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-state)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerStats_claw_ctor"
                %physx::physx+px-controller-stats)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:135:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-stats)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllerStats_claw_dtor"
                %physx::physx+~px-controller-stats)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:135:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controller-stats)))
 
@@ -13240,14 +13247,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllersHit_claw_ctor"
                %physx::physx+px-controllers-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:172:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controllers-hit)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxControllersHit_claw_dtor"
                %physx::physx+~px-controllers-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxController.h:172:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-controllers-hit)))
 
@@ -13266,14 +13273,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConverterReportMode_claw_ctor"
                %physx::physx+px-converter-report-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxBinaryConverter.h:44:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-converter-report-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConverterReportMode_claw_dtor"
                %physx::physx+~px-converter-report-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxBinaryConverter.h:44:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-converter-report-mode)))
 
@@ -13292,14 +13299,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexFlag_claw_ctor"
                %physx::physx+px-convex-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxConvexMeshDesc.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexFlag_claw_dtor"
                %physx::physx+~px-convex-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxConvexMeshDesc.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-flag)))
 
@@ -13446,7 +13453,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshCookingResult_claw_ctor"
                %physx::physx+px-convex-mesh-cooking-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:58:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-convex-mesh-cooking-result)))
@@ -13454,7 +13461,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshCookingResult_claw_dtor"
                %physx::physx+~px-convex-mesh-cooking-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:58:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-convex-mesh-cooking-result)))
@@ -13474,14 +13481,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshCookingType_claw_ctor"
                %physx::physx+px-convex-mesh-cooking-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:91:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-mesh-cooking-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshCookingType_claw_dtor"
                %physx::physx+~px-convex-mesh-cooking-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:91:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-mesh-cooking-type)))
 
@@ -13561,7 +13568,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshDesc_claw_dtor"
                %physx::physx+~px-convex-mesh-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxConvexMeshDesc.h:155:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-mesh-desc)))
 
@@ -13607,21 +13614,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshGeometryFlag_claw_ctor"
                %physx::physx+px-convex-mesh-geometry-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxConvexMeshGeometry.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-mesh-geometry-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshGeometryFlag_claw_dtor"
                %physx::physx+~px-convex-mesh-geometry-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxConvexMeshGeometry.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-mesh-geometry-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxConvexMeshGeometry_claw_dtor"
                %physx::physx+~px-convex-mesh-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxConvexMeshGeometry.h:80:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-convex-mesh-geometry)))
 
@@ -13985,7 +13992,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCookingParams_claw_dtor"
                %physx::physx+~px-cooking-params)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:175:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cooking-params)))
 
@@ -14133,14 +14140,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaBufferFlags_claw_ctor"
                %physx::physx+px-cuda-buffer-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:152:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-buffer-flags)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaBufferFlags_claw_dtor"
                %physx::physx+~px-cuda-buffer-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:152:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-buffer-flags)))
 
@@ -14159,14 +14166,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaBufferMemorySpace_claw_ctor"
                %physx::physx+px-cuda-buffer-memory-space)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:74:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-buffer-memory-space)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaBufferMemorySpace_claw_dtor"
                %physx::physx+~px-cuda-buffer-memory-space)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:74:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-buffer-memory-space)))
 
@@ -14193,7 +14200,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaBufferType_claw_dtor"
                %physx::physx+~px-cuda-buffer-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:176:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-buffer-type)))
 
@@ -14224,6 +14231,15 @@
               "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:269:26"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-context-manager)))
+
+(iffi:defistruct (%physx::c-uctx-st :size-reporter nil
+                  :alignment-reporter nil)
+                 nil
+                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:43:16")
+
+(iffi:defitype %physx::c-ucontext
+               (:pointer %physx::c-uctx-st)
+               "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:43:26")
 
 (iffi:defifun ("__claw__ZN5physx20PxCudaContextManager10getContextEv"
                %physx::physx+get-context)
@@ -14482,7 +14498,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaContextManagerDesc_claw_dtor"
                %physx::physx+~px-cuda-context-manager-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:88:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-context-manager-desc)))
 
@@ -14501,14 +14517,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaInteropMode_claw_ctor"
                %physx::physx+px-cuda-interop-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-interop-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaInteropMode_claw_dtor"
                %physx::physx+~px-cuda-interop-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-interop-mode)))
 
@@ -14527,7 +14543,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaInteropRegisterFlag_claw_ctor"
                %physx::physx+px-cuda-interop-register-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:67:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-cuda-interop-register-flag)))
@@ -14535,7 +14551,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaInteropRegisterFlag_claw_dtor"
                %physx::physx+~px-cuda-interop-register-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaContextManager.h:67:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-cuda-interop-register-flag)))
@@ -14708,14 +14724,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaMemoryManagerStats_claw_ctor"
                %physx::physx+px-cuda-memory-manager-stats)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:165:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-memory-manager-stats)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxCudaMemoryManagerStats_claw_dtor"
                %physx::physx+~px-cuda-memory-manager-stats)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:165:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-cuda-memory-manager-stats)))
 
@@ -14744,14 +14760,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6Axis_claw_ctor"
                %physx::physx+px-d6axis)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:65:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6axis)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6Axis_claw_dtor"
                %physx::physx+~px-d6axis)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:65:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6axis)))
 
@@ -14780,14 +14796,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6Drive_claw_ctor"
                %physx::physx+px-d6drive)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:111:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6drive)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6Drive_claw_dtor"
                %physx::physx+~px-d6drive)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:111:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6drive)))
 
@@ -15238,21 +15254,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6JointDriveFlag_claw_ctor"
                %physx::physx+px-d6joint-drive-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:130:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6joint-drive-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6JointDriveFlag_claw_dtor"
                %physx::physx+~px-d6joint-drive-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:130:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6joint-drive-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6JointDrive_claw_dtor"
                %physx::physx+~px-d6joint-drive)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:145:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6joint-drive)))
 
@@ -15271,14 +15287,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6Motion_claw_ctor"
                %physx::physx+px-d6motion)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:85:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6motion)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxD6Motion_claw_dtor"
                %physx::physx+~px-d6motion)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxD6Joint.h:85:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-d6motion)))
 
@@ -15297,14 +15313,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDataAccessFlag_claw_ctor"
                %physx::physx+px-data-access-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxLockedData.h:45:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-data-access-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDataAccessFlag_claw_dtor"
                %physx::physx+~px-data-access-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxLockedData.h:45:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-data-access-flag)))
 
@@ -15338,14 +15354,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDebugColor_claw_ctor"
                %physx::physx+px-debug-color)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxRenderBuffer.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-debug-color)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDebugColor_claw_dtor"
                %physx::physx+~px-debug-color)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxRenderBuffer.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-debug-color)))
 
@@ -15392,7 +15408,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDebugLine_claw_dtor"
                %physx::physx+~px-debug-line)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxRenderBuffer.h:85:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-debug-line)))
 
@@ -15429,7 +15445,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDebugPoint_claw_dtor"
                %physx::physx+~px-debug-point)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxRenderBuffer.h:73:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-debug-point)))
 
@@ -15484,7 +15500,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDebugText_claw_dtor"
                %physx::physx+~px-debug-text)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxRenderBuffer.h:115:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-debug-text)))
 
@@ -15544,7 +15560,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDebugTriangle_claw_dtor"
                %physx::physx+~px-debug-triangle)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxRenderBuffer.h:99:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-debug-triangle)))
 
@@ -15582,14 +15598,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDefaultAllocator_claw_ctor"
                %physx::physx+px-default-allocator)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:89:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-default-allocator)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDefaultAllocator_claw_dtor"
                %physx::physx+~px-default-allocator)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:89:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-default-allocator)))
 
@@ -15832,7 +15848,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDefaultMemoryInputData_claw_dtor"
                %physx::physx+~px-default-memory-input-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDefaultStreams.h:82:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-default-memory-input-data)))
 
@@ -15907,14 +15923,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDeletionEventFlag_claw_ctor"
                %physx::physx+px-deletion-event-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxDeletionListener.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-deletion-event-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDeletionEventFlag_claw_dtor"
                %physx::physx+~px-deletion-event-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxDeletionListener.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-deletion-event-flag)))
 
@@ -16106,14 +16122,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDistanceJointFlag_claw_ctor"
                %physx::physx+px-distance-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDistanceJoint.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-distance-joint-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDistanceJointFlag_claw_dtor"
                %physx::physx+~px-distance-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDistanceJoint.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-distance-joint-flag)))
 
@@ -16153,7 +16169,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxDominanceGroupPair_claw_dtor"
                %physx::physx+~px-dominance-group-pair)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxScene.h:83:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-dominance-group-pair)))
 
@@ -16183,14 +16199,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxErrorCode_claw_ctor"
                %physx::physx+px-error-code)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxErrors.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-error-code)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxErrorCode_claw_dtor"
                %physx::physx+~px-error-code)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxErrors.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-error-code)))
 
@@ -16222,14 +16238,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxExtendedContact_claw_ctor"
                %physx::physx+px-extended-contact)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:122:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-extended-contact)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxExtendedContact_claw_dtor"
                %physx::physx+~px-extended-contact)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:122:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-extended-contact)))
 
@@ -16470,7 +16486,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxExtendedVec3_claw_dtor"
                %physx::physx+~px-extended-vec3)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxExtended.h:56:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-extended-vec3)))
 
@@ -16542,7 +16558,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterData_claw_dtor"
                %physx::physx+~px-filter-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:366:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-data)))
 
@@ -16561,14 +16577,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterFlag_claw_ctor"
                %physx::physx+px-filter-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:289:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterFlag_claw_dtor"
                %physx::physx+~px-filter-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:289:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-flag)))
 
@@ -16593,14 +16609,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterObjectFlag_claw_ctor"
                %physx::physx+px-filter-object-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:476:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-object-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterObjectFlag_claw_dtor"
                %physx::physx+~px-filter-object-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:476:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-object-flag)))
 
@@ -16619,14 +16635,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterObjectType_claw_ctor"
                %physx::physx+px-filter-object-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:444:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-object-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterObjectType_claw_dtor"
                %physx::physx+~px-filter-object-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:444:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-object-type)))
 
@@ -16645,14 +16661,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterOp_claw_ctor"
                %physx::physx+px-filter-op)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDefaultSimulationFilterShader.h:84:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-op)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFilterOp_claw_dtor"
                %physx::physx+~px-filter-op)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDefaultSimulationFilterShader.h:84:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-filter-op)))
 
@@ -17183,7 +17199,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40Px1DConstraintFlagE40EE40TypeE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px1d-constraint-flag+type+unsigned+short>)))
@@ -17530,7 +17546,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxActorFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-actor-flag+enum+unsigned+char>)))
@@ -17877,7 +17893,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxActorTypeFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-actor-type-flag+enum+unsigned+short>)))
@@ -18224,7 +18240,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxArticulationAxisE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-articulation-axis+enum+unsigned+char>)))
@@ -18571,7 +18587,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxArticulationCacheE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-articulation-cache+enum+unsigned+char>)))
@@ -18918,7 +18934,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxArticulationFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-articulation-flag+enum+unsigned+char>)))
@@ -19265,7 +19281,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxArticulationMotionE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-articulation-motion+enum+unsigned+char>)))
@@ -19612,7 +19628,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxBaseFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-base-flag+enum+unsigned+short>)))
@@ -19959,7 +19975,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxConstraintFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-constraint-flag+enum+unsigned+short>)))
@@ -20306,7 +20322,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxContactPairFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-contact-pair-flag+enum+unsigned+short>)))
@@ -20666,7 +20682,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxContactPairHeaderFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-contact-pair-header-flag+enum+unsigned+short>)))
@@ -21026,7 +21042,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxControllerBehaviorFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-controller-behavior-flag+enum+unsigned+char>)))
@@ -21386,7 +21402,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxControllerCollisionFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-controller-collision-flag+enum+unsigned+char>)))
@@ -21746,7 +21762,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxControllerDebugRenderFlagE40EE40EnumE23i_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-controller-debug-render-flag+enum+unsigned+int>)))
@@ -22093,7 +22109,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxConvexFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-convex-flag+enum+unsigned+short>)))
@@ -22453,7 +22469,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxConvexMeshGeometryFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-convex-mesh-geometry-flag+enum+unsigned+char>)))
@@ -22813,7 +22829,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxCudaInteropRegisterFlagE40EE40EnumE23i_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-cuda-interop-register-flag+enum+unsigned+int>)))
@@ -23160,7 +23176,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxD6JointDriveFlagE40EE40EnumE23i_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-d6joint-drive-flag+enum+unsigned+int>)))
@@ -23507,7 +23523,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxDataAccessFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-data-access-flag+enum+unsigned+char>)))
@@ -23854,7 +23870,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxDeletionEventFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-deletion-event-flag+enum+unsigned+char>)))
@@ -24201,7 +24217,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxDistanceJointFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-distance-joint-flag+enum+unsigned+short>)))
@@ -24548,7 +24564,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxFilterFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-filter-flag+enum+unsigned+short>)))
@@ -24895,7 +24911,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxHeightFieldFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-height-field-flag+enum+unsigned+short>)))
@@ -25242,7 +25258,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxHitFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-hit-flag+enum+unsigned+short>)))
@@ -25589,7 +25605,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxMaterialFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-material-flag+enum+unsigned+short>)))
@@ -25936,7 +25952,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxMeshFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-mesh-flag+enum+unsigned+short>)))
@@ -26283,7 +26299,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxMeshGeometryFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-mesh-geometry-flag+enum+unsigned+char>)))
@@ -26651,7 +26667,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxMeshPreprocessingFlagE40EE40EnumE23i_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-mesh-preprocessing-flag+enum+unsigned+int>)))
@@ -26998,7 +27014,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxPairFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-pair-flag+enum+unsigned+short>)))
@@ -27345,7 +27361,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxPrismaticJointFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-prismatic-joint-flag+enum+unsigned+short>)))
@@ -27705,7 +27721,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxPvdInstrumentationFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-pvd-instrumentation-flag+enum+unsigned+char>)))
@@ -28052,7 +28068,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxPvdSceneFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-pvd-scene-flag+enum+unsigned+char>)))
@@ -28399,7 +28415,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxQueryFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-query-flag+enum+unsigned+short>)))
@@ -28746,7 +28762,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxRevoluteJointFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-revolute-joint-flag+enum+unsigned+short>)))
@@ -29093,7 +29109,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxRigidBodyFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-rigid-body-flag+enum+unsigned+char>)))
@@ -29453,7 +29469,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxRigidDynamicLockFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-rigid-dynamic-lock-flag+enum+unsigned+char>)))
@@ -29800,7 +29816,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxSceneFlagE40EE40EnumE23i_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-scene-flag+enum+unsigned+int>)))
@@ -30147,7 +30163,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxShapeFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-shape-flag+enum+unsigned+char>)))
@@ -30494,7 +30510,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxSphericalJointFlagE40EE40EnumE23s_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-spherical-joint-flag+enum+unsigned+short>)))
@@ -30841,7 +30857,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxTriangleMeshFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-triangle-mesh-flag+enum+unsigned+char>)))
@@ -31188,7 +31204,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxTriggerPairFlagE40EE40EnumE23c_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-trigger-pair-flag+enum+unsigned+char>)))
@@ -31548,7 +31564,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFlagsE3EE23E24E40NE40physxE40SE40PxVehicleWheelsSimFlagE40EE40EnumE23i_claw_dtor"
                %physx::physx+~px-flags)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:73:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-flags<physx+px-vehicle-wheels-sim-flag+enum+unsigned+int>)))
@@ -31575,14 +31591,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxForceMode_claw_ctor"
                %physx::physx+px-force-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxForceMode.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-force-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxForceMode_claw_dtor"
                %physx::physx+~px-force-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxForceMode.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-force-mode)))
 
@@ -31660,14 +31676,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFrictionType_claw_ctor"
                %physx::physx+px-friction-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:127:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-friction-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxFrictionType_claw_dtor"
                %physx::physx+~px-friction-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:127:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-friction-type)))
 
@@ -31876,7 +31892,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxGeometryHolder_claw_dtor"
                %physx::physx+~px-geometry-holder)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxGeometryHelpers.h:64:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-geometry-holder)))
 
@@ -31972,14 +31988,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxGeometryQuery_claw_ctor"
                %physx::physx+px-geometry-query)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxGeometryQuery.h:63:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-geometry-query)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxGeometryQuery_claw_dtor"
                %physx::physx+~px-geometry-query)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxGeometryQuery.h:63:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-geometry-query)))
 
@@ -31998,21 +32014,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxGeometryType_claw_ctor"
                %physx::physx+px-geometry-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxGeometry.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-geometry-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxGeometryType_claw_dtor"
                %physx::physx+~px-geometry-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxGeometry.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-geometry-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxGeometry_claw_dtor"
                %physx::physx+~px-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxGeometry.h:75:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-geometry)))
 
@@ -32240,7 +32256,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldDesc_claw_dtor"
                %physx::physx+~px-height-field-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldDesc.h:54:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-desc)))
 
@@ -32259,14 +32275,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldFlag_claw_ctor"
                %physx::physx+px-height-field-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldFlag.h:131:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldFlag_claw_dtor"
                %physx::physx+~px-height-field-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldFlag.h:131:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-flag)))
 
@@ -32285,14 +32301,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldFormat_claw_ctor"
                %physx::physx+px-height-field-format)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldFlag.h:48:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-format)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldFormat_claw_dtor"
                %physx::physx+~px-height-field-format)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldFlag.h:48:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-format)))
 
@@ -32326,7 +32342,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldGeometry_claw_dtor"
                %physx::physx+~px-height-field-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldGeometry.h:56:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-geometry)))
 
@@ -32350,14 +32366,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldMaterial_claw_ctor"
                %physx::physx+px-height-field-material)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldSample.h:49:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-material)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldMaterial_claw_dtor"
                %physx::physx+~px-height-field-material)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldSample.h:49:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-material)))
 
@@ -32385,14 +32401,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldSample_claw_ctor"
                %physx::physx+px-height-field-sample)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldSample.h:68:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-sample)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldSample_claw_dtor"
                %physx::physx+~px-height-field-sample)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldSample.h:68:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-sample)))
 
@@ -32416,14 +32432,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldTessFlag_claw_ctor"
                %physx::physx+px-height-field-tess-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldFlag.h:80:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-tess-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHeightFieldTessFlag_claw_dtor"
                %physx::physx+~px-height-field-tess-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxHeightFieldFlag.h:80:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-height-field-tess-flag)))
 
@@ -32889,28 +32905,28 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHitFlag_claw_ctor"
                %physx::physx+px-hit-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:62:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-hit-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHitFlag_claw_dtor"
                %physx::physx+~px-hit-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:62:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-hit-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHullPolygon_claw_ctor"
                %physx::physx+px-hull-polygon)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxConvexMesh.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-hull-polygon)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxHullPolygon_claw_dtor"
                %physx::physx+~px-hull-polygon)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxConvexMesh.h:51:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-hull-polygon)))
 
@@ -32991,7 +33007,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJacobianRow_claw_dtor"
                %physx::physx+~px-jacobian-row)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxContactJoint.h:61:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-jacobian-row)))
 
@@ -33236,14 +33252,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointActorIndex_claw_ctor"
                %physx::physx+px-joint-actor-index)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:87:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-actor-index)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointActorIndex_claw_dtor"
                %physx::physx+~px-joint-actor-index)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:87:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-actor-index)))
 
@@ -33297,7 +33313,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointAngularLimitPair_claw_dtor"
                %physx::physx+~px-joint-angular-limit-pair)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJointLimit.h:295:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-angular-limit-pair)))
 
@@ -33328,14 +33344,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointConcreteType_claw_ctor"
                %physx::physx+px-joint-concrete-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:56:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-concrete-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointConcreteType_claw_dtor"
                %physx::physx+~px-joint-concrete-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:56:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-concrete-type)))
 
@@ -33369,7 +33385,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointLimitCone_claw_dtor"
                %physx::physx+~px-joint-limit-cone)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJointLimit.h:369:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-limit-cone)))
 
@@ -33479,7 +33495,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointLimitPyramid_claw_dtor"
                %physx::physx+~px-joint-limit-pyramid)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJointLimit.h:448:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-limit-pyramid)))
 
@@ -33542,14 +33558,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointLinearLimitPair_claw_dtor"
                %physx::physx+~px-joint-linear-limit-pair)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJointLimit.h:228:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-linear-limit-pair)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxJointLinearLimit_claw_dtor"
                %physx::physx+~px-joint-linear-limit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJointLimit.h:165:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-joint-linear-limit)))
 
@@ -33670,7 +33686,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxLocationHit_claw_dtor"
                %physx::physx+~px-location-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:138:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-location-hit)))
 
@@ -33704,14 +33720,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMassModificationProps_claw_ctor"
                %physx::physx+px-mass-modification-props)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mass-modification-props)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMassModificationProps_claw_dtor"
                %physx::physx+~px-mass-modification-props)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mass-modification-props)))
 
@@ -33843,7 +33859,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMassProperties_claw_dtor"
                %physx::physx+~px-mass-properties)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxMassProperties.h:63:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mass-properties)))
 
@@ -34114,7 +34130,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMat33_claw_dtor"
                %physx::physx+~px-mat33)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxMat33.h:90:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mat33)))
 
@@ -34511,7 +34527,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMat44_claw_dtor"
                %physx::physx+~px-mat44)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxMat44.h:54:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mat44)))
 
@@ -34666,14 +34682,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMaterialFlag_claw_ctor"
                %physx::physx+px-material-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxMaterial.h:52:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-material-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMaterialFlag_claw_dtor"
                %physx::physx+~px-material-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxMaterial.h:52:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-material-flag)))
 
@@ -34692,14 +34708,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshCookingHint_claw_ctor"
                %physx::physx+px-mesh-cooking-hint)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:46:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-cooking-hint)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshCookingHint_claw_dtor"
                %physx::physx+~px-mesh-cooking-hint)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxBVH33MidphaseDesc.h:46:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-cooking-hint)))
 
@@ -34718,14 +34734,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshFlag_claw_ctor"
                %physx::physx+px-mesh-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxSimpleTriangleMesh.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshFlag_claw_dtor"
                %physx::physx+~px-mesh-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxSimpleTriangleMesh.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-flag)))
 
@@ -34744,14 +34760,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshGeometryFlag_claw_ctor"
                %physx::physx+px-mesh-geometry-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMeshGeometry.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-geometry-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshGeometryFlag_claw_dtor"
                %physx::physx+~px-mesh-geometry-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMeshGeometry.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-geometry-flag)))
 
@@ -34776,14 +34792,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshMidPhase_claw_ctor"
                %physx::physx+px-mesh-mid-phase)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMesh.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-mid-phase)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshMidPhase_claw_dtor"
                %physx::physx+~px-mesh-mid-phase)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMesh.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-mid-phase)))
 
@@ -34869,14 +34885,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshPreprocessingFlag_claw_ctor"
                %physx::physx+px-mesh-preprocessing-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:134:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-preprocessing-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshPreprocessingFlag_claw_dtor"
                %physx::physx+~px-mesh-preprocessing-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:134:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-preprocessing-flag)))
 
@@ -34991,14 +35007,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshQuery_claw_ctor"
                %physx::physx+px-mesh-query)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxMeshQuery.h:53:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-query)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshQuery_claw_dtor"
                %physx::physx+~px-mesh-query)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxMeshQuery.h:53:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-query)))
 
@@ -35096,7 +35112,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMeshScale_claw_dtor"
                %physx::physx+~px-mesh-scale)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxMeshScale.h:68:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-mesh-scale)))
 
@@ -35157,14 +35173,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMetaDataEntry_claw_ctor"
                %physx::physx+px-meta-data-entry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxMetaData.h:52:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-meta-data-entry)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMetaDataEntry_claw_dtor"
                %physx::physx+~px-meta-data-entry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxMetaData.h:52:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-meta-data-entry)))
 
@@ -35204,14 +35220,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMetaDataFlag_claw_ctor"
                %physx::physx+px-meta-data-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxMetaDataFlags.h:46:12"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-meta-data-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMetaDataFlag_claw_dtor"
                %physx::physx+~px-meta-data-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxMetaDataFlags.h:46:12"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-meta-data-flag)))
 
@@ -35256,7 +35272,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxMidphaseDesc_claw_dtor"
                %physx::physx+~px-midphase-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxMidphaseDesc.h:52:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-midphase-desc)))
 
@@ -35322,14 +35338,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxModifiableContact_claw_ctor"
                %physx::physx+px-modifiable-contact)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:140:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-modifiable-contact)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxModifiableContact_claw_dtor"
                %physx::physx+~px-modifiable-contact)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxContact.h:140:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-modifiable-contact)))
 
@@ -35405,7 +35421,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxObstacle_claw_dtor"
                %physx::physx+~px-obstacle)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/characterkinematic/PxControllerObstacles.h:53:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-obstacle)))
 
@@ -35421,14 +35437,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxOverlapHit_claw_ctor"
                %physx::physx+px-overlap-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:192:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-overlap-hit)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxOverlapHit_claw_dtor"
                %physx::physx+~px-overlap-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:192:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-overlap-hit)))
 
@@ -35442,7 +35458,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPaddingE3EE23Vc3_claw_dtor"
                %physx::physx+~px-padding)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxCoreUtilityTypes.h:90:8"
               (%physx::%%claw-this-
                (:pointer %physx::|PHYSX+PX-PADDING<'\\X03'>|)))
 
@@ -35469,14 +35485,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPairFilteringMode_claw_ctor"
                %physx::physx+px-pair-filtering-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:699:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pair-filtering-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPairFilteringMode_claw_dtor"
                %physx::physx+~px-pair-filtering-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:699:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pair-filtering-mode)))
 
@@ -35495,14 +35511,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPairFlag_claw_ctor"
                %physx::physx+px-pair-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:55:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pair-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPairFlag_claw_dtor"
                %physx::physx+~px-pair-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:55:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pair-flag)))
 
@@ -35625,7 +35641,7 @@
                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:793:7")
 
 (iffi:defitype %physx::physx+px-simulation-filter-shader
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxFiltering.h:588:25")
 
 (iffi:deficlass (%physx::physx+px-simulation-filter-callback
@@ -36448,14 +36464,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPlaneGeometry_claw_dtor"
                %physx::physx+~px-plane-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxPlaneGeometry.h:59:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-plane-geometry)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPlane_claw_dtor"
                %physx::physx+~px-plane)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxPlane.h:50:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-plane)))
 
@@ -36578,14 +36594,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPrismaticJointFlag_claw_ctor"
                %physx::physx+px-prismatic-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxPrismaticJoint.h:65:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-prismatic-joint-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPrismaticJointFlag_claw_dtor"
                %physx::physx+~px-prismatic-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxPrismaticJoint.h:65:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-prismatic-joint-flag)))
 
@@ -36737,14 +36753,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPruningStructureType_claw_ctor"
                %physx::physx+px-pruning-structure-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:70:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pruning-structure-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPruningStructureType_claw_dtor"
                %physx::physx+~px-pruning-structure-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:70:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pruning-structure-type)))
 
@@ -36810,14 +36826,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPvdInstrumentationFlag_claw_ctor"
                %physx::physx+px-pvd-instrumentation-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/pvd/PxPvd.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pvd-instrumentation-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPvdInstrumentationFlag_claw_dtor"
                %physx::physx+~px-pvd-instrumentation-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/pvd/PxPvd.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pvd-instrumentation-flag)))
 
@@ -36931,14 +36947,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPvdSceneFlag_claw_ctor"
                %physx::physx+px-pvd-scene-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/pvd/PxPvdSceneClient.h:59:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pvd-scene-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPvdSceneFlag_claw_dtor"
                %physx::physx+~px-pvd-scene-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/pvd/PxPvdSceneClient.h:59:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pvd-scene-flag)))
 
@@ -37022,14 +37038,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPvdUpdateType_claw_ctor"
                %physx::physx+px-pvd-update-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:332:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pvd-update-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxPvdUpdateType_claw_dtor"
                %physx::physx+~px-pvd-update-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:332:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-pvd-update-type)))
 
@@ -37309,7 +37325,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQuat_claw_dtor"
                %physx::physx+~px-quat)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxQuat.h:49:7"
               (%physx::%%claw-this- (:pointer %physx::physx+px-quat)))
 
 (iffi:defifun ("__claw__ZN5physx12PxQueryCacheC1Ev"
@@ -37331,7 +37347,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQueryCache_claw_dtor"
                %physx::physx+~px-query-cache)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxScene.h:143:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-query-cache)))
 
@@ -37408,7 +37424,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQueryFilterData_claw_dtor"
                %physx::physx+~px-query-filter-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryFiltering.h:132:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-query-filter-data)))
 
@@ -37427,14 +37443,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQueryFlag_claw_ctor"
                %physx::physx+px-query-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryFiltering.h:57:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-query-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQueryFlag_claw_dtor"
                %physx::physx+~px-query-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryFiltering.h:57:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-query-flag)))
 
@@ -37460,21 +37476,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQueryHitType_claw_ctor"
                %physx::physx+px-query-hit-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryFiltering.h:108:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-query-hit-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQueryHitType_claw_dtor"
                %physx::physx+~px-query-hit-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryFiltering.h:108:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-query-hit-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxQueryHit_claw_dtor"
                %physx::physx+~px-query-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:117:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-query-hit)))
 
@@ -37488,7 +37504,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRaycastHit_claw_dtor"
                %physx::physx+~px-raycast-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:174:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-raycast-hit)))
 
@@ -37584,7 +37600,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRepXObject_claw_dtor"
                %physx::physx+~px-rep-x-object)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxRepXSimpleType.h:52:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rep-x-object)))
 
@@ -37767,14 +37783,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRevoluteJointFlag_claw_ctor"
                %physx::physx+px-revolute-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxRevoluteJoint.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-revolute-joint-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRevoluteJointFlag_claw_dtor"
                %physx::physx+~px-revolute-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxRevoluteJoint.h:64:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-revolute-joint-flag)))
 
@@ -37900,14 +37916,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidActorExt_claw_ctor"
                %physx::physx+px-rigid-actor-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxRigidActorExt.h:52:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-actor-ext)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidActorExt_claw_dtor"
                %physx::physx+~px-rigid-actor-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxRigidActorExt.h:52:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-actor-ext)))
 
@@ -38441,14 +38457,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidBodyExt_claw_ctor"
                %physx::physx+px-rigid-body-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxRigidBodyExt.h:58:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-body-ext)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidBodyExt_claw_dtor"
                %physx::physx+~px-rigid-body-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxRigidBodyExt.h:58:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-body-ext)))
 
@@ -38467,14 +38483,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidBodyFlag_claw_ctor"
                %physx::physx+px-rigid-body-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxRigidBody.h:52:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-body-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidBodyFlag_claw_dtor"
                %physx::physx+~px-rigid-body-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxRigidBody.h:52:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-body-flag)))
 
@@ -38654,14 +38670,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidDynamicLockFlag_claw_ctor"
                %physx::physx+px-rigid-dynamic-lock-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxRigidDynamic.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-dynamic-lock-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxRigidDynamicLockFlag_claw_dtor"
                %physx::physx+~px-rigid-dynamic-lock-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxRigidDynamic.h:50:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-rigid-dynamic-lock-flag)))
 
@@ -39928,7 +39944,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneDesc_claw_dtor"
                %physx::physx+~px-scene-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:471:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-desc)))
 
@@ -39947,14 +39963,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneFlag_claw_ctor"
                %physx::physx+px-scene-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:162:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneFlag_claw_dtor"
                %physx::physx+~px-scene-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:162:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-flag)))
 
@@ -39982,7 +39998,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneLimits_claw_dtor"
                %physx::physx+~px-scene-limits)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:379:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-limits)))
 
@@ -40177,14 +40193,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneQueryExt_claw_ctor"
                %physx::physx+px-scene-query-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxSceneQueryExt.h:62:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-query-ext)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneQueryExt_claw_dtor"
                %physx::physx+~px-scene-query-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxSceneQueryExt.h:62:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-query-ext)))
 
@@ -40203,14 +40219,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneQueryUpdateMode_claw_ctor"
                %physx::physx+px-scene-query-update-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:101:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-query-update-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSceneQueryUpdateMode_claw_dtor"
                %physx::physx+~px-scene-query-update-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:101:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-scene-query-update-mode)))
 
@@ -40489,7 +40505,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSerializationE40SE40PxXmlMiscParameter_claw_dtor"
                %physx::physx+~px-xml-misc-parameter)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxSerialization.h:74:9"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-serialization+px-xml-misc-parameter)))
@@ -40568,7 +40584,7 @@
               (%physx::type %physx::physx+px-type))
 
 (iffi:defitype %physx::physx+px-binary-meta-data-callback
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxSerialFramework.h:278:16")
 
 (iffi:defifun ("__claw__ZN5physx23PxSerializationRegistry30registerBinaryMetaDataCallbackEPFvRNS_14PxOutputStreamEE"
@@ -40626,14 +40642,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSerialization_claw_ctor"
                %physx::physx+px-serialization)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxSerialization.h:64:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-serialization)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSerialization_claw_dtor"
                %physx::physx+~px-serialization)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxSerialization.h:64:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-serialization)))
 
@@ -41111,14 +41127,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxShapeExt_claw_ctor"
                %physx::physx+px-shape-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxShapeExt.h:54:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-shape-ext)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxShapeExt_claw_dtor"
                %physx::physx+~px-shape-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxShapeExt.h:54:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-shape-ext)))
 
@@ -41137,14 +41153,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxShapeFlag_claw_ctor"
                %physx::physx+px-shape-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxShape.h:63:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-shape-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxShapeFlag_claw_dtor"
                %physx::physx+~px-shape-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxShape.h:63:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-shape-flag)))
 
@@ -41172,7 +41188,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSimpleTriangleMesh_claw_dtor"
                %physx::physx+~px-simple-triangle-mesh)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxSimpleTriangleMesh.h:84:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-simple-triangle-mesh)))
 
@@ -41393,7 +41409,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSimulationStatistics_claw_dtor"
                %physx::physx+~px-simulation-statistics)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationStatistics.h:51:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-simulation-statistics)))
 
@@ -41546,106 +41562,23 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverBodyData_claw_ctor"
                %physx::physx+px-solver-body-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:80:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-body-data)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverBodyData_claw_dtor"
                %physx::physx+~px-solver-body-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:80:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-body-data)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverBody_claw_dtor"
                %physx::physx+~px-solver-body)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:63:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-body)))
-
-(iffi:defistruct (%physx::physx+px-tgs-solver-body-vel
-                   :size-reporter
-                   "__claw_sizeof_physx_PxTGSSolverBodyVel"
-                   :alignment-reporter
-                   "__claw_alignof_physx_PxTGSSolverBodyVel"
-                   :constructor
-                   %physx::physx+px-tgs-solver-body-vel
-                   :destructor
-                   %physx::physx+~px-tgs-solver-body-vel)
-                 nil
-                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:314:8"
-                 (%physx::linear-velocity
-                  (:pointer %physx::physx+px-vec3) :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_linearVelocity"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_linearVelocity"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:316:23")
-                 (%physx::nb-static-interactions %physx::physx+px-u16
-                  :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_nbStaticInteractions"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_nbStaticInteractions"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:317:10")
-                 (%physx::max-dynamic-partition %physx::physx+px-u16
-                  :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_maxDynamicPartition"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_maxDynamicPartition"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:318:10")
-                 (%physx::angular-velocity
-                  (:pointer %physx::physx+px-vec3) :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_angularVelocity"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_angularVelocity"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:319:11")
-                 (%physx::partition-mask %physx::physx+px-u32 :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_partitionMask"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_partitionMask"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:320:10")
-                 (%physx::delta-ang-dt
-                  (:pointer %physx::physx+px-vec3) :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_deltaAngDt"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_deltaAngDt"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:321:11")
-                 (%physx::max-ang-vel %physx::physx+px-real :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_maxAngVel"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_maxAngVel"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:322:11")
-                 (%physx::delta-lin-dt
-                  (:pointer %physx::physx+px-vec3) :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_deltaLinDt"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_deltaLinDt"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:323:11")
-                 (%physx::lock-flags %physx::physx+px-u16 :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_lockFlags"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_lockFlags"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:324:10")
-                 (%physx::is-kinematic :bool :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_isKinematic"
-                  :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_isKinematic"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:325:9")
-                 (%physx::pad %physx::physx+px-u8 :setter
-                  "__claw_set_physx_PxTGSSolverBodyVel_pad" :getter
-                  "__claw_get_physx_PxTGSSolverBodyVel_pad"
-                  :documentation
-                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:326:9"))
 
 (iffi:defistruct (%physx::physx+px-solver-constraint-desc
                    :size-reporter
@@ -41718,23 +41651,17 @@
                (:contact-constraint 0)
                (:joint-constraint 1))
 
-(define-symbol-macro
-  %physx::*physx+no-link*
-  (let ((%physx::ptr (cffi:foreign-symbol-pointer "NO_LINK")))
-    (when %physx::ptr
-      (cffi:mem-ref %physx::ptr '%physx::physx+px-u16))))
-
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverConstraintDesc_claw_ctor"
                %physx::physx+px-solver-constraint-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:111:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-constraint-desc)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverConstraintDesc_claw_dtor"
                %physx::physx+~px-solver-constraint-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:111:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-constraint-desc)))
 
@@ -41921,7 +41848,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverConstraintPrepDescBase_claw_ctor"
                %physx::physx+px-solver-constraint-prep-desc-base)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:145:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-solver-constraint-prep-desc-base)))
@@ -41929,7 +41856,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverConstraintPrepDescBase_claw_dtor"
                %physx::physx+~px-solver-constraint-prep-desc-base)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:145:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-solver-constraint-prep-desc-base)))
@@ -41937,7 +41864,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverConstraintPrepDesc_claw_ctor"
                %physx::physx+px-solver-constraint-prep-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:172:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-solver-constraint-prep-desc)))
@@ -41945,7 +41872,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverConstraintPrepDesc_claw_dtor"
                %physx::physx+~px-solver-constraint-prep-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:172:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-solver-constraint-prep-desc)))
@@ -42077,14 +42004,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverContactDesc_claw_ctor"
                %physx::physx+px-solver-contact-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:188:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-contact-desc)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverContactDesc_claw_dtor"
                %physx::physx+~px-solver-contact-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:188:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-contact-desc)))
 
@@ -42103,42 +42030,42 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverType_claw_ctor"
                %physx::physx+px-solver-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:146:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSolverType_claw_dtor"
                %physx::physx+~px-solver-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:146:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-solver-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSpatialForce_claw_ctor"
                %physx::physx+px-spatial-force)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationReducedCoordinate.h:47:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-spatial-force)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSpatialForce_claw_dtor"
                %physx::physx+~px-spatial-force)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationReducedCoordinate.h:47:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-spatial-force)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSpatialVelocity_claw_ctor"
                %physx::physx+px-spatial-velocity)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationReducedCoordinate.h:57:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-spatial-velocity)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSpatialVelocity_claw_dtor"
                %physx::physx+~px-spatial-velocity)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxArticulationReducedCoordinate.h:57:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-spatial-velocity)))
 
@@ -42167,7 +42094,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSphereGeometry_claw_dtor"
                %physx::physx+~px-sphere-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxSphereGeometry.h:49:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-sphere-geometry)))
 
@@ -42274,14 +42201,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSphericalJointFlag_claw_ctor"
                %physx::physx+px-spherical-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxSphericalJoint.h:65:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-spherical-joint-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSphericalJointFlag_claw_dtor"
                %physx::physx+~px-spherical-joint-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxSphericalJoint.h:65:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-spherical-joint-flag)))
 
@@ -42297,7 +42224,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSpring_claw_dtor"
                %physx::physx+~px-spring)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:381:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-spring)))
 
@@ -42311,7 +42238,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxStridedData_claw_dtor"
                %physx::physx+~px-strided-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxCoreUtilityTypes.h:46:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-strided-data)))
 
@@ -42352,14 +42279,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxStringTableExt_claw_ctor"
                %physx::physx+px-string-table-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxStringTableExt.h:47:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-string-table-ext)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxStringTableExt_claw_dtor"
                %physx::physx+~px-string-table-ext)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxStringTableExt.h:47:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-string-table-ext)))
 
@@ -42373,7 +42300,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxSweepHit_claw_dtor"
                %physx::physx+~px-sweep-hit)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxQueryReport.h:200:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-sweep-hit)))
 
@@ -42453,14 +42380,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverBodyData_claw_ctor"
                %physx::physx+px-tgs-solver-body-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:342:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-tgs-solver-body-data)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverBodyData_claw_dtor"
                %physx::physx+~px-tgs-solver-body-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:342:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-tgs-solver-body-data)))
 
@@ -42493,7 +42420,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverBodyTxInertia_claw_ctor"
                %physx::physx+px-tgs-solver-body-tx-inertia)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:336:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-tgs-solver-body-tx-inertia)))
@@ -42501,10 +42428,93 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverBodyTxInertia_claw_dtor"
                %physx::physx+~px-tgs-solver-body-tx-inertia)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:336:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-tgs-solver-body-tx-inertia)))
+
+(iffi:defistruct (%physx::physx+px-tgs-solver-body-vel
+                   :size-reporter
+                   "__claw_sizeof_physx_PxTGSSolverBodyVel"
+                   :alignment-reporter
+                   "__claw_alignof_physx_PxTGSSolverBodyVel"
+                   :constructor
+                   %physx::physx+px-tgs-solver-body-vel
+                   :destructor
+                   %physx::physx+~px-tgs-solver-body-vel)
+                 nil
+                 "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:314:8"
+                 (%physx::linear-velocity
+                  (:pointer %physx::physx+px-vec3) :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_linearVelocity"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_linearVelocity"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:316:23")
+                 (%physx::nb-static-interactions %physx::physx+px-u16
+                  :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_nbStaticInteractions"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_nbStaticInteractions"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:317:10")
+                 (%physx::max-dynamic-partition %physx::physx+px-u16
+                  :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_maxDynamicPartition"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_maxDynamicPartition"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:318:10")
+                 (%physx::angular-velocity
+                  (:pointer %physx::physx+px-vec3) :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_angularVelocity"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_angularVelocity"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:319:11")
+                 (%physx::partition-mask %physx::physx+px-u32 :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_partitionMask"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_partitionMask"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:320:10")
+                 (%physx::delta-ang-dt
+                  (:pointer %physx::physx+px-vec3) :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_deltaAngDt"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_deltaAngDt"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:321:11")
+                 (%physx::max-ang-vel %physx::physx+px-real :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_maxAngVel"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_maxAngVel"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:322:11")
+                 (%physx::delta-lin-dt
+                  (:pointer %physx::physx+px-vec3) :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_deltaLinDt"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_deltaLinDt"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:323:11")
+                 (%physx::lock-flags %physx::physx+px-u16 :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_lockFlags"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_lockFlags"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:324:10")
+                 (%physx::is-kinematic :bool :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_isKinematic"
+                  :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_isKinematic"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:325:9")
+                 (%physx::pad %physx::physx+px-u8 :setter
+                  "__claw_set_physx_PxTGSSolverBodyVel_pad" :getter
+                  "__claw_get_physx_PxTGSSolverBodyVel_pad"
+                  :documentation
+                  "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:326:9"))
 
 (iffi:defifun ("__claw__ZNK5physx18PxTGSSolverBodyVel15projectVelocityERKNS_6PxVec3ES3_"
                %physx::physx+project-velocity :non-mutating t)
@@ -42518,14 +42528,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverBodyVel_claw_ctor"
                %physx::physx+px-tgs-solver-body-vel)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:314:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-tgs-solver-body-vel)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverBodyVel_claw_dtor"
                %physx::physx+~px-tgs-solver-body-vel)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:314:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-tgs-solver-body-vel)))
 
@@ -42738,7 +42748,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverConstraintPrepDescBase_claw_ctor"
                %physx::physx+px-tgs-solver-constraint-prep-desc-base)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:360:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-tgs-solver-constraint-prep-desc-base)))
@@ -42746,7 +42756,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverConstraintPrepDescBase_claw_dtor"
                %physx::physx+~px-tgs-solver-constraint-prep-desc-base)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:360:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-tgs-solver-constraint-prep-desc-base)))
@@ -42754,7 +42764,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverConstraintPrepDesc_claw_ctor"
                %physx::physx+px-tgs-solver-constraint-prep-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:383:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-tgs-solver-constraint-prep-desc)))
@@ -42762,7 +42772,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverConstraintPrepDesc_claw_dtor"
                %physx::physx+~px-tgs-solver-constraint-prep-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:383:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-tgs-solver-constraint-prep-desc)))
@@ -42909,14 +42919,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverContactDesc_claw_ctor"
                %physx::physx+px-tgs-solver-contact-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:402:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-tgs-solver-contact-desc)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTGSSolverContactDesc_claw_dtor"
                %physx::physx+~px-tgs-solver-contact-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:402:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-tgs-solver-contact-desc)))
 
@@ -43104,14 +43114,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTaskType_claw_ctor"
                %physx::physx+px-task-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/task/PxTaskManager.h:52:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-task-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTaskType_claw_dtor"
                %physx::physx+~px-task-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/task/PxTaskManager.h:52:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-task-type)))
 
@@ -43132,7 +43142,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTolerancesScale_claw_dtor"
                %physx::physx+~px-tolerances-scale)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTolerancesScale.h:56:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-tolerances-scale)))
 
@@ -43343,7 +43353,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTransform_claw_dtor"
                %physx::physx+~px-transform)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxTransform.h:48:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-transform)))
 
@@ -43539,7 +43549,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriangleMeshCookingResult_claw_ctor"
                %physx::physx+px-triangle-mesh-cooking-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:107:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-triangle-mesh-cooking-result)))
@@ -43547,7 +43557,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriangleMeshCookingResult_claw_dtor"
                %physx::physx+~px-triangle-mesh-cooking-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxCooking.h:107:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-triangle-mesh-cooking-result)))
@@ -43576,7 +43586,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriangleMeshDesc_claw_dtor"
                %physx::physx+~px-triangle-mesh-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/cooking/PxTriangleMeshDesc.h:54:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-triangle-mesh-desc)))
 
@@ -43595,14 +43605,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriangleMeshFlag_claw_ctor"
                %physx::physx+px-triangle-mesh-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMesh.h:80:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-triangle-mesh-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriangleMeshFlag_claw_dtor"
                %physx::physx+~px-triangle-mesh-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMesh.h:80:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-triangle-mesh-flag)))
 
@@ -43636,7 +43646,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriangleMeshGeometry_claw_dtor"
                %physx::physx+~px-triangle-mesh-geometry)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/geometry/PxTriangleMeshGeometry.h:82:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-triangle-mesh-geometry)))
 
@@ -43662,21 +43672,21 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriggerPairFlag_claw_ctor"
                %physx::physx+px-trigger-pair-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:715:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-trigger-pair-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriggerPairFlag_claw_dtor"
                %physx::physx+~px-trigger-pair-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:715:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-trigger-pair-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTriggerPair_claw_dtor"
                %physx::physx+~px-trigger-pair)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSimulationEventCallback.h:746:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-trigger-pair)))
 
@@ -43700,14 +43710,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxActor_claw_ctor"
                %physx::physx+px-type-info<physx+px-actor>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:108:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-actor>)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxActor_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:108:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-actor>)))
 
@@ -43731,7 +43741,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxAggregate_claw_ctor"
                %physx::physx+px-type-info<physx+px-aggregate>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:118:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-aggregate>)))
@@ -43739,7 +43749,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxAggregate_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:118:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-aggregate>)))
@@ -43798,7 +43808,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationJointReducedCoordinate_claw_ctor"
                %physx::physx+px-type-info<physx+px-articulation-joint-reduced-coordinate>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:115:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-joint-reduced-coordinate>)))
@@ -43806,7 +43816,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationJointReducedCoordinate_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:115:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-joint-reduced-coordinate>)))
@@ -43814,7 +43824,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-articulation-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:114:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-joint>)))
@@ -43822,7 +43832,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:114:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-joint>)))
@@ -43847,7 +43857,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationLink_claw_ctor"
                %physx::physx+px-type-info<physx+px-articulation-link>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:113:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-link>)))
@@ -43855,7 +43865,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationLink_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:113:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-link>)))
@@ -43880,7 +43890,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationReducedCoordinate_claw_ctor"
                %physx::physx+px-type-info<physx+px-articulation-reduced-coordinate>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:117:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-reduced-coordinate>)))
@@ -43888,7 +43898,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulationReducedCoordinate_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:117:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation-reduced-coordinate>)))
@@ -43896,7 +43906,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulation_claw_ctor"
                %physx::physx+px-type-info<physx+px-articulation>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:116:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation>)))
@@ -43904,7 +43914,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxArticulation_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:116:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-articulation>)))
@@ -43929,7 +43939,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxBVH33TriangleMesh_claw_ctor"
                %physx::physx+px-type-info<physx+px-bvh33triangle-mesh>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:105:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-bvh33triangle-mesh>)))
@@ -43937,7 +43947,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxBVH33TriangleMesh_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:105:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-bvh33triangle-mesh>)))
@@ -43962,7 +43972,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxBVH34TriangleMesh_claw_ctor"
                %physx::physx+px-type-info<physx+px-bvh34triangle-mesh>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:106:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-bvh34triangle-mesh>)))
@@ -43970,7 +43980,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxBVH34TriangleMesh_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:106:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-bvh34triangle-mesh>)))
@@ -43995,14 +44005,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxBase_claw_ctor"
                %physx::physx+px-type-info<physx+px-base>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:101:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-base>)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxBase_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:101:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-base>)))
 
@@ -44026,7 +44036,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxConstraint_claw_ctor"
                %physx::physx+px-type-info<physx+px-constraint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:119:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-constraint>)))
@@ -44034,7 +44044,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxConstraint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:119:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-constraint>)))
@@ -44059,7 +44069,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxContactJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-contact-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:74:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-contact-joint>)))
@@ -44067,7 +44077,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxContactJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:74:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-contact-joint>)))
@@ -44092,7 +44102,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxConvexMesh_claw_ctor"
                %physx::physx+px-type-info<physx+px-convex-mesh>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:103:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-convex-mesh>)))
@@ -44100,7 +44110,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxConvexMesh_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:103:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-convex-mesh>)))
@@ -44125,7 +44135,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxD6Joint_claw_ctor"
                %physx::physx+px-type-info<physx+px-d6joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:72:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-d6joint>)))
@@ -44133,7 +44143,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxD6Joint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:72:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-d6joint>)))
@@ -44158,7 +44168,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxDistanceJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-distance-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:73:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-distance-joint>)))
@@ -44166,7 +44176,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxDistanceJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:73:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-distance-joint>)))
@@ -44191,7 +44201,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxFixedJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-fixed-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:75:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-fixed-joint>)))
@@ -44199,7 +44209,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxFixedJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:75:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-fixed-joint>)))
@@ -44224,7 +44234,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxHeightField_claw_ctor"
                %physx::physx+px-type-info<physx+px-height-field>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:107:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-height-field>)))
@@ -44232,7 +44242,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxHeightField_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:107:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-height-field>)))
@@ -44257,14 +44267,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:71:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-joint>)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:71:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-joint>)))
 
@@ -44288,7 +44298,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxMaterial_claw_ctor"
                %physx::physx+px-type-info<physx+px-material>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:102:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-material>)))
@@ -44296,7 +44306,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxMaterial_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:102:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-material>)))
@@ -44321,7 +44331,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxPrismaticJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-prismatic-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:76:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-prismatic-joint>)))
@@ -44329,7 +44339,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxPrismaticJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:76:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-prismatic-joint>)))
@@ -44354,7 +44364,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxPruningStructure_claw_ctor"
                %physx::physx+px-type-info<physx+px-pruning-structure>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:121:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-pruning-structure>)))
@@ -44362,7 +44372,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxPruningStructure_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:121:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-pruning-structure>)))
@@ -44387,7 +44397,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRevoluteJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-revolute-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:77:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-revolute-joint>)))
@@ -44395,7 +44405,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRevoluteJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:77:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-revolute-joint>)))
@@ -44420,7 +44430,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidActor_claw_ctor"
                %physx::physx+px-type-info<physx+px-rigid-actor>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:109:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-actor>)))
@@ -44428,7 +44438,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidActor_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:109:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-actor>)))
@@ -44453,7 +44463,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidBody_claw_ctor"
                %physx::physx+px-type-info<physx+px-rigid-body>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:110:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-body>)))
@@ -44461,7 +44471,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidBody_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:110:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-body>)))
@@ -44486,7 +44496,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidDynamic_claw_ctor"
                %physx::physx+px-type-info<physx+px-rigid-dynamic>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:111:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-dynamic>)))
@@ -44494,7 +44504,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidDynamic_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:111:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-dynamic>)))
@@ -44519,7 +44529,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidStatic_claw_ctor"
                %physx::physx+px-type-info<physx+px-rigid-static>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:112:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-static>)))
@@ -44527,7 +44537,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxRigidStatic_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:112:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-rigid-static>)))
@@ -44552,14 +44562,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxShape_claw_ctor"
                %physx::physx+px-type-info<physx+px-shape>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:120:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-shape>)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxShape_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:120:1"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-type-info<physx+px-shape>)))
 
@@ -44583,7 +44593,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxSphericalJoint_claw_ctor"
                %physx::physx+px-type-info<physx+px-spherical-joint>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:78:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-spherical-joint>)))
@@ -44591,7 +44601,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxSphericalJoint_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxJoint.h:78:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-spherical-joint>)))
@@ -44616,7 +44626,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxTriangleMesh_claw_ctor"
                %physx::physx+px-type-info<physx+px-triangle-mesh>)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:104:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-triangle-mesh>)))
@@ -44624,7 +44634,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypeInfoE3EE23E24E40NE40physxE40SE40PxTriangleMesh_claw_dtor"
                %physx::physx+~px-type-info)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxTypeInfo.h:104:1"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-type-info<physx+px-triangle-mesh>)))
@@ -44640,7 +44650,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxTypedStridedDataE3EE23s_claw_dtor"
                %physx::physx+~px-typed-strided-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/common/PxCoreUtilityTypes.h:70:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-typed-strided-data<unsigned+short>)))
@@ -44925,7 +44935,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVec2_claw_dtor"
                %physx::physx+~px-vec2)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxVec2.h:49:7"
               (%physx::%%claw-this- (:pointer %physx::physx+px-vec2)))
 
 (iffi:defifun ("__claw__ZN5physx6PxVec3C1Ev" %physx::physx+px-vec3)
@@ -45190,7 +45200,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVec3_claw_dtor"
                %physx::physx+~px-vec3)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxVec3.h:49:7"
               (%physx::%%claw-this- (:pointer %physx::physx+px-vec3)))
 
 (iffi:defifun ("__claw__ZN5physx6PxVec4C1Ev" %physx::physx+px-vec4)
@@ -45444,7 +45454,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVec4_claw_dtor"
                %physx::physx+~px-vec4)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxVec4.h:49:7"
               (%physx::%%claw-this- (:pointer %physx::physx+px-vec4)))
 
 (iffi:deficlass (%physx::physx+px-vehicle-ackermann-geometry-data
@@ -45504,7 +45514,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleAckermannGeometryData_claw_dtor"
                %physx::physx+~px-vehicle-ackermann-geometry-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:582:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-ackermann-geometry-data)))
@@ -45550,7 +45560,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleAntiRollBarData_claw_dtor"
                %physx::physx+~px-vehicle-anti-roll-bar-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:1138:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-anti-roll-bar-data)))
@@ -45681,7 +45691,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleAutoBoxData_claw_dtor"
                %physx::physx+~px-vehicle-auto-box-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:347:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-auto-box-data)))
 
@@ -45725,7 +45735,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleChassisData_claw_dtor"
                %physx::physx+~px-vehicle-chassis-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:47:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-chassis-data)))
 
@@ -45750,7 +45760,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleClutchAccuracyMode_claw_ctor"
                %physx::physx+px-vehicle-clutch-accuracy-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:655:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-clutch-accuracy-mode)))
@@ -45758,7 +45768,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleClutchAccuracyMode_claw_dtor"
                %physx::physx+~px-vehicle-clutch-accuracy-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:655:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-clutch-accuracy-mode)))
@@ -45814,7 +45824,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleClutchData_claw_dtor"
                %physx::physx+~px-vehicle-clutch-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:664:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-clutch-data)))
 
@@ -45841,14 +45851,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleConcreteType_claw_ctor"
                %physx::physx+px-vehicle-concrete-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleSDK.h:116:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-concrete-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleConcreteType_claw_dtor"
                %physx::physx+~px-vehicle-concrete-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleSDK.h:116:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-concrete-type)))
 
@@ -45863,7 +45873,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleConcurrentUpdateData_claw_dtor"
                %physx::physx+~px-vehicle-concurrent-update-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUpdate.h:275:9"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-concurrent-update-data)))
@@ -45878,7 +45888,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleCopyDynamicsMap_claw_dtor"
                %physx::physx+~px-vehicle-copy-dynamics-map)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilSetup.h:115:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-copy-dynamics-map)))
 
@@ -45972,7 +45982,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleDifferential4WData_claw_dtor"
                %physx::physx+~px-vehicle-differential4w-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:430:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-differential4w-data)))
@@ -46045,7 +46055,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleDifferentialNWData_claw_dtor"
                %physx::physx+~px-vehicle-differential-nw-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:535:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-differential-nw-data)))
@@ -46140,7 +46150,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleDrivableSurfaceType_claw_ctor"
                %physx::physx+px-vehicle-drivable-surface-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleTireFriction.h:49:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-drivable-surface-type)))
@@ -46148,7 +46158,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleDrivableSurfaceType_claw_dtor"
                %physx::physx+~px-vehicle-drivable-surface-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleTireFriction.h:49:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-drivable-surface-type)))
@@ -46244,7 +46254,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleEngineData_claw_dtor"
                %physx::physx+~px-vehicle-engine-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:89:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-engine-data)))
 
@@ -46318,7 +46328,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleGearsData_claw_dtor"
                %physx::physx+~px-vehicle-gears-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:242:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-gears-data)))
 
@@ -46466,7 +46476,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleGraphChannelDesc_claw_dtor"
                %physx::physx+~px-vehicle-graph-channel-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilTelemetry.h:93:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-graph-channel-desc)))
@@ -46474,7 +46484,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleGraphDesc_claw_dtor"
                %physx::physx+~px-vehicle-graph-desc)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilTelemetry.h:47:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-graph-desc)))
 
@@ -46493,14 +46503,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleGraphType_claw_ctor"
                %physx::physx+px-vehicle-graph-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilTelemetry.h:173:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-graph-type)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleGraphType_claw_dtor"
                %physx::physx+~px-vehicle-graph-type)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilTelemetry.h:173:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-graph-type)))
 
@@ -46531,7 +46541,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleKeySmoothingData_claw_ctor"
                %physx::physx+px-vehicle-key-smoothing-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilControl.h:54:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-key-smoothing-data)))
@@ -46539,7 +46549,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleKeySmoothingData_claw_dtor"
                %physx::physx+~px-vehicle-key-smoothing-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilControl.h:54:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-key-smoothing-data)))
@@ -46753,7 +46763,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehiclePadSmoothingData_claw_ctor"
                %physx::physx+px-vehicle-pad-smoothing-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilControl.h:74:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-pad-smoothing-data)))
@@ -46761,7 +46771,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehiclePadSmoothingData_claw_dtor"
                %physx::physx+~px-vehicle-pad-smoothing-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilControl.h:74:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-pad-smoothing-data)))
@@ -46865,7 +46875,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleSuspensionData_claw_dtor"
                %physx::physx+~px-vehicle-suspension-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:960:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-suspension-data)))
 
@@ -47030,7 +47040,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleTireData_claw_dtor"
                %physx::physx+~px-vehicle-tire-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:1178:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-tire-data)))
 
@@ -47107,7 +47117,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleTireLoadFilterData_claw_dtor"
                %physx::physx+~px-vehicle-tire-load-filter-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:762:7"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-tire-load-filter-data)))
@@ -47138,14 +47148,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleTypes_claw_ctor"
                %physx::physx+px-vehicle-types)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleSDK.h:95:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-types)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleTypes_claw_dtor"
                %physx::physx+~px-vehicle-types)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleSDK.h:95:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-types)))
 
@@ -47164,14 +47174,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleUpdateMode_claw_ctor"
                %physx::physx+px-vehicle-update-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleSDK.h:141:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-update-mode)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleUpdateMode_claw_dtor"
                %physx::physx+~px-vehicle-update-mode)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleSDK.h:141:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-update-mode)))
 
@@ -47186,7 +47196,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelConcurrentUpdateData_claw_dtor"
                %physx::physx+~px-vehicle-wheel-concurrent-update-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUpdate.h:248:9"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-wheel-concurrent-update-data)))
@@ -47280,7 +47290,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelData_claw_dtor"
                %physx::physx+~px-vehicle-wheel-data)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleComponents.h:818:7"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-wheel-data)))
 
@@ -47315,7 +47325,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelGraphChannel_claw_ctor"
                %physx::physx+px-vehicle-wheel-graph-channel)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilTelemetry.h:137:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-wheel-graph-channel)))
@@ -47323,7 +47333,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelGraphChannel_claw_dtor"
                %physx::physx+~px-vehicle-wheel-graph-channel)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUtilTelemetry.h:137:8"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-wheel-graph-channel)))
@@ -47331,7 +47341,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelQueryResult_claw_ctor"
                %physx::physx+px-vehicle-wheel-query-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUpdate.h:223:9"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-wheel-query-result)))
@@ -47339,7 +47349,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelQueryResult_claw_dtor"
                %physx::physx+~px-vehicle-wheel-query-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUpdate.h:223:9"
               (%physx::%%claw-this-
                (:pointer
                 %physx::physx+px-vehicle-wheel-query-result)))
@@ -47588,7 +47598,7 @@
               (%physx::tire-force-shader-data (:pointer :void)))
 
 (iffi:defitype %physx::physx+px-vehicle-compute-tire-force
-               (:pointer :pointer)
+               (:pointer :void)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleShaders.h:64:16")
 
 (iffi:defifun ("__claw__ZN5physx22PxVehicleWheelsDynData26setTireForceShaderFunctionEPFvPKvffffffffffffRfS3_S3_S3_E"
@@ -48189,14 +48199,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelsSimFlag_claw_ctor"
                %physx::physx+px-vehicle-wheels-sim-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleWheels.h:60:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-wheels-sim-flag)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVehicleWheelsSimFlag_claw_dtor"
                %physx::physx+~px-vehicle-wheels-sim-flag)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleWheels.h:60:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-vehicle-wheels-sim-flag)))
 
@@ -48215,14 +48225,14 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVisualizationParameter_claw_ctor"
                %physx::physx+px-visualization-parameter)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxVisualizationParameter.h:62:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-visualization-parameter)))
 
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxVisualizationParameter_claw_dtor"
                %physx::physx+~px-visualization-parameter)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxVisualizationParameter.h:62:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-visualization-parameter)))
 
@@ -48236,7 +48246,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxWheelQueryResult_claw_dtor"
                %physx::physx+~px-wheel-query-result)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/vehicle/PxVehicleUpdate.h:59:9"
               (%physx::%%claw-this-
                (:pointer %physx::physx+px-wheel-query-result)))
 
@@ -48250,7 +48260,7 @@
 (iffi:defifun ("__claw_cE3AE40NE40physxE40SE40PxgDynamicsMemoryConfig_claw_dtor"
                %physx::physx+~pxg-dynamics-memory-config)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxSceneDesc.h:438:8"
               (%physx::%%claw-this-
                (:pointer %physx::physx+pxg-dynamics-memory-config)))
 
@@ -48299,14 +48309,14 @@
 (iffi:defifun ("__claw_cE3AE40SE40PxPackValidation_claw_ctor"
                %physx::px-pack-validation)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxPreprocessor.h:471:8"
               (%physx::%%claw-this-
                (:pointer %physx::px-pack-validation)))
 
 (iffi:defifun ("__claw_cE3AE40SE40PxPackValidation_claw_dtor"
                %physx::~px-pack-validation)
               :void
-              "::"
+              "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxPreprocessor.h:471:8"
               (%physx::%%claw-this-
                (:pointer %physx::px-pack-validation)))
 
@@ -48318,172 +48328,19 @@
                %physx::physx+px-bit-and-data-t<unsigned+short+32768>
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxBitAndData.h:79:47")
 
-(defparameter %physx::*physx+px-default-client* 0)
-
-(defparameter %physx::*physx+px-max-clients* 128)
-
 (iffi:defitype %physx::physx+px1d-constraint-flags
                %physx::physx+px-flags<physx+px1d-constraint-flag+type+unsigned+short>
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/PxConstraintDesc.h:84:50")
-
-(iffi:defistruct (%physx::%io-marker :size-reporter nil
-                  :alignment-reporter nil)
-                 nil
-                 "/usr/include/bits/types/struct_FILE.h:36:8")
-
-(iffi:defitype %physx::%%off-t
-               :long
-               "/usr/include/bits/types.h:152:25")
-
-(iffi:defitype %physx::%io-lock-t
-               :void
-               "/usr/include/bits/types/struct_FILE.h:43:14")
-
-(iffi:defitype %physx::%%off64-t
-               :long
-               "/usr/include/bits/types.h:153:27")
-
-(iffi:defistruct (%physx::%io-codecvt :size-reporter nil
-                  :alignment-reporter nil)
-                 nil
-                 "/usr/include/bits/types/struct_FILE.h:37:8")
-
-(iffi:defistruct (%physx::%io-wide-data :size-reporter nil
-                  :alignment-reporter nil)
-                 nil
-                 "/usr/include/bits/types/struct_FILE.h:38:8")
-
-(iffi:defirecord %physx::%io-file nil "forward declaration")
 
 (iffi:defistruct (%physx::%io-file :size-reporter
                   "__claw_sizeof__IO_FILE" :alignment-reporter
                   "__claw_alignof__IO_FILE")
                  nil
-                 "/usr/include/bits/types/struct_FILE.h:49:8"
-                 (%physx::%flags :int :setter
-                  "__claw_set__IO_FILE__flags" :getter
-                  "__claw_get__IO_FILE__flags" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:51:7")
-                 (%physx::%io-read-ptr claw-utils:claw-string :setter
-                  "__claw_set__IO_FILE__IO_read_ptr" :getter
-                  "__claw_get__IO_FILE__IO_read_ptr" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:54:9")
-                 (%physx::%io-read-end claw-utils:claw-string :setter
-                  "__claw_set__IO_FILE__IO_read_end" :getter
-                  "__claw_get__IO_FILE__IO_read_end" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:55:9")
-                 (%physx::%io-read-base claw-utils:claw-string
-                  :setter "__claw_set__IO_FILE__IO_read_base" :getter
-                  "__claw_get__IO_FILE__IO_read_base" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:56:9")
-                 (%physx::%io-write-base claw-utils:claw-string
-                  :setter "__claw_set__IO_FILE__IO_write_base"
-                  :getter "__claw_get__IO_FILE__IO_write_base"
-                  :documentation
-                  "/usr/include/bits/types/struct_FILE.h:57:9")
-                 (%physx::%io-write-ptr claw-utils:claw-string
-                  :setter "__claw_set__IO_FILE__IO_write_ptr" :getter
-                  "__claw_get__IO_FILE__IO_write_ptr" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:58:9")
-                 (%physx::%io-write-end claw-utils:claw-string
-                  :setter "__claw_set__IO_FILE__IO_write_end" :getter
-                  "__claw_get__IO_FILE__IO_write_end" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:59:9")
-                 (%physx::%io-buf-base claw-utils:claw-string :setter
-                  "__claw_set__IO_FILE__IO_buf_base" :getter
-                  "__claw_get__IO_FILE__IO_buf_base" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:60:9")
-                 (%physx::%io-buf-end claw-utils:claw-string :setter
-                  "__claw_set__IO_FILE__IO_buf_end" :getter
-                  "__claw_get__IO_FILE__IO_buf_end" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:61:9")
-                 (%physx::%io-save-base claw-utils:claw-string
-                  :setter "__claw_set__IO_FILE__IO_save_base" :getter
-                  "__claw_get__IO_FILE__IO_save_base" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:64:9")
-                 (%physx::%io-backup-base claw-utils:claw-string
-                  :setter "__claw_set__IO_FILE__IO_backup_base"
-                  :getter "__claw_get__IO_FILE__IO_backup_base"
-                  :documentation
-                  "/usr/include/bits/types/struct_FILE.h:65:9")
-                 (%physx::%io-save-end claw-utils:claw-string :setter
-                  "__claw_set__IO_FILE__IO_save_end" :getter
-                  "__claw_get__IO_FILE__IO_save_end" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:66:9")
-                 (%physx::%markers (:pointer %physx::%io-marker)
-                  :setter "__claw_set__IO_FILE__markers" :getter
-                  "__claw_get__IO_FILE__markers" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:68:22")
-                 (%physx::%chain (:pointer %physx::%io-file) :setter
-                  "__claw_set__IO_FILE__chain" :getter
-                  "__claw_get__IO_FILE__chain" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:70:20")
-                 (%physx::%fileno :int :setter
-                  "__claw_set__IO_FILE__fileno" :getter
-                  "__claw_get__IO_FILE__fileno" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:72:7")
-                 (%physx::%flags2 :int :setter
-                  "__claw_set__IO_FILE__flags2" :getter
-                  "__claw_get__IO_FILE__flags2" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:73:7")
-                 (%physx::%old-offset %physx::%%off-t :setter
-                  "__claw_set__IO_FILE__old_offset" :getter
-                  "__claw_get__IO_FILE__old_offset" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:74:11")
-                 (%physx::%cur-column :unsigned-short :setter
-                  "__claw_set__IO_FILE__cur_column" :getter
-                  "__claw_get__IO_FILE__cur_column" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:77:18")
-                 (%physx::%vtable-offset :char :setter
-                  "__claw_set__IO_FILE__vtable_offset" :getter
-                  "__claw_get__IO_FILE__vtable_offset" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:78:15")
-                 (%physx::%shortbuf claw-utils:claw-string :setter
-                  nil :getter "__claw_get__IO_FILE__shortbuf"
-                  :documentation
-                  "/usr/include/bits/types/struct_FILE.h:79:8")
-                 (%physx::%lock (:pointer %physx::%io-lock-t) :setter
-                  "__claw_set__IO_FILE__lock" :getter
-                  "__claw_get__IO_FILE__lock" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:81:15")
-                 (%physx::%offset %physx::%%off64-t :setter
-                  "__claw_set__IO_FILE__offset" :getter
-                  "__claw_get__IO_FILE__offset" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:89:13")
-                 (%physx::%codecvt (:pointer %physx::%io-codecvt)
-                  :setter "__claw_set__IO_FILE__codecvt" :getter
-                  "__claw_get__IO_FILE__codecvt" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:91:23")
-                 (%physx::%wide-data (:pointer %physx::%io-wide-data)
-                  :setter "__claw_set__IO_FILE__wide_data" :getter
-                  "__claw_get__IO_FILE__wide_data" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:92:25")
-                 (%physx::%freeres-list (:pointer %physx::%io-file)
-                  :setter "__claw_set__IO_FILE__freeres_list" :getter
-                  "__claw_get__IO_FILE__freeres_list" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:93:20")
-                 (%physx::%freeres-buf (:pointer :void) :setter
-                  "__claw_set__IO_FILE__freeres_buf" :getter
-                  "__claw_get__IO_FILE__freeres_buf" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:94:9")
-                 (%physx::%%pad5 %physx::size-t :setter
-                  "__claw_set__IO_FILE___pad5" :getter
-                  "__claw_get__IO_FILE___pad5" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:95:10")
-                 (%physx::%mode :int :setter
-                  "__claw_set__IO_FILE__mode" :getter
-                  "__claw_get__IO_FILE__mode" :documentation
-                  "/usr/include/bits/types/struct_FILE.h:96:7")
-                 (%physx::%unused2 claw-utils:claw-string :setter nil
-                  :getter "__claw_get__IO_FILE__unused2"
-                  :documentation
-                  "/usr/include/bits/types/struct_FILE.h:98:8"))
+                 "/usr/include/bits/types/struct_FILE.h:49:8")
 
 (iffi:defitype %physx::px-file-handle
                (:pointer %physx::%io-file)
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/physx/include/extensions/PxDefaultStreams.h:42:15")
-
-(defparameter %physx::*physx+invalid-filter-pair-index* 4294967295)
 
 (iffi:defitype %physx::physx+px-flags<physx+px1d-constraint-flag+type+unsigned+short>+internal-type
                :unsigned-short
@@ -48652,20 +48509,6 @@
 (iffi:defitype %physx::physx+px-flags<physx+px-vehicle-wheels-sim-flag+enum+unsigned+int>+internal-type
                :unsigned-int
                "/home/borodust/devel/repo/claw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:76:22")
-
-(defparameter %physx::*physx+px-half-pi* 1.5707963705062866D0)
-
-(defparameter %physx::*physx+px-inv-pi* 0.31830987334251404D0)
-
-(defparameter %physx::*physx+px-inv-two-pi* 0.15915493667125702D0)
-
-(defparameter %physx::*physx+px-pi* 3.1415927410125732D0)
-
-(defparameter %physx::*physx+px-pi-div-four* 0.7853981852531433D0)
-
-(defparameter %physx::*physx+px-pi-div-two* 1.5707963705062866D0)
-
-(defparameter %physx::*physx+px-two-pi* 6.2831854820251465D0)
 
 (iffi:defitype %physx::px-compile-time-assert-dummy
                claw-utils:claw-string
@@ -48906,7 +48749,6 @@
           "%PHYSX")
   (export '%physx::physx+px-solver-constraint-desc+constraint-type
           "%PHYSX")
-  (export '%physx::%flags2 "%PHYSX")
   (export '%physx::physx+px-cuda-buffer-flags+enum "%PHYSX")
   (export '%physx::app-guid "%PHYSX")
   (export '%physx::physx+px-shape-ext+raycast "%PHYSX")
@@ -49029,7 +48871,7 @@
   (export '%physx::word2 "%PHYSX")
   (export '%physx::physx+release-drive-cache "%PHYSX")
   (export '%physx::physx+get-transpose "%PHYSX")
-  (export '%physx::physx+px-vehicle-tire-force-calculator "%PHYSX")
+  (export '%physx::+physx+px-pi-div-four+ "%PHYSX")
   (export '%physx::torque "%PHYSX")
   (export '%physx::physx+set-stabilization-threshold "%PHYSX")
   (export '%physx::physx+get-basis-vector1 "%PHYSX")
@@ -49048,7 +48890,7 @@
   (export '%physx::physx+~px-flags "%PHYSX")
   (export '%physx::physx+get-nb-wheel-data "%PHYSX")
   (export '%physx::physx+get-static-structure "%PHYSX")
-  (export '%physx::physx+px-vehicle-wheel-data "%PHYSX")
+  (export '%physx::physx+px-vehicle-tire-force-calculator "%PHYSX")
   (export '%physx::physx+px-bounds3+bounds-of-points "%PHYSX")
   (export '%physx::desc "%PHYSX")
   (export '%physx::physx+pre-export-data-reset "%PHYSX")
@@ -49106,7 +48948,6 @@
   (export '%physx::physx+~px1d-constraint "%PHYSX")
   (export '%physx::physx+~px-joint-linear-limit "%PHYSX")
   (export '%physx::physx+px-data-access-flag+enum "%PHYSX")
-  (export '%physx::%io-buf-base "%PHYSX")
   (export '%physx::physx+px-bit-and-word "%PHYSX")
   (export '%physx::physx+~px-solver-constraint-prep-desc-base
           "%PHYSX")
@@ -49161,6 +49002,7 @@
   (export '%physx::physx+~px-height-field-sample "%PHYSX")
   (export '%physx::physx+px-vehicle-clutch-data "%PHYSX")
   (export '%physx::physx+px-mesh-query+get-triangle "%PHYSX")
+  (export '%physx::physx+px-vehicle-wheel-data "%PHYSX")
   (export '%physx::physx+is-kind-of "%PHYSX")
   (export '%physx::physx+px-get-filter-ops "%PHYSX")
   (export '%physx::physx+px-vehicle-graph "%PHYSX")
@@ -49329,7 +49171,6 @@
   (export '%physx::physx+~px-tgs-solver-constraint-prep-desc
           "%PHYSX")
   (export '%physx::physx+get-flags "%PHYSX")
-  (export '%physx::*physx+px-half-pi* "%PHYSX")
   (export '%physx::physx+overlap "%PHYSX")
   (export '%physx::physx+px-box-geometry "%PHYSX")
   (export '%physx::physx+~px-overlap-hit "%PHYSX")
@@ -49443,7 +49284,6 @@
   (export '%physx::radius "%PHYSX")
   (export '%physx::physx+px-string-table "%PHYSX")
   (export '%physx::physx+px-mem-set "%PHYSX")
-  (export '%physx::%offset "%PHYSX")
   (export '%physx::physx+px-triangle-mesh "%PHYSX")
   (export '%physx::physx+get-global-pose "%PHYSX")
   (export '%physx::physx+px-create-plane "%PHYSX")
@@ -49479,11 +49319,9 @@
   (export '%physx::physx+~px-tgs-solver-body-tx-inertia "%PHYSX")
   (export '%physx::physx+~px-scene-desc "%PHYSX")
   (export '%physx::physx+get-max-threads-per-block "%PHYSX")
-  (export '%physx::*physx+no-link* "%PHYSX")
   (export '%physx::m-context-id "%PHYSX")
   (export '%physx::m-mid-y "%PHYSX")
   (export '%physx::friction-count "%PHYSX")
-  (export '%physx::%io-wide-data "%PHYSX")
   (export '%physx::physx+get-actors "%PHYSX")
   (export '%physx::physx+get-bounce-threshold-velocity "%PHYSX")
   (export '%physx::physx+export-data "%PHYSX")
@@ -49511,7 +49349,6 @@
   (export '%physx::physx+get-points "%PHYSX")
   (export '%physx::susp-jounce "%PHYSX")
   (export '%physx::physx+unlock-write "%PHYSX")
-  (export '%physx::%cur-column "%PHYSX")
   (export '%physx::physx+fetch-results-start "%PHYSX")
   (export '%physx::physx+~px-vehicle-wheel-graph-channel "%PHYSX")
   (export '%physx::physx+px-get-groups-mask "%PHYSX")
@@ -49598,12 +49435,11 @@
   (export '%physx::physx+px-set-filter-ops "%PHYSX")
   (export '%physx::physx+set-child-pose "%PHYSX")
   (export '%physx::physx+~px-tgs-solver-body-data "%PHYSX")
-  (export '%physx::%freeres-buf "%PHYSX")
+  (export '%physx::px-compile-time-assert-dummy "%PHYSX")
   (export '%physx::physx+px-solver-body-data "%PHYSX")
   (export '%physx::physx+px-plane-geometry "%PHYSX")
   (export '%physx::physx+get-drive-target "%PHYSX")
   (export '%physx::physx+xml-reader "%PHYSX")
-  (export '%physx::px-compile-time-assert-dummy "%PHYSX")
   (export '%physx::physx+~px-task "%PHYSX")
   (export '%physx::user-sweep-touch-buffer "%PHYSX")
   (export '%physx::physx+register-deletion-listener-objects "%PHYSX")
@@ -49641,17 +49477,18 @@
   (export '%physx::physx+read "%PHYSX")
   (export '%physx::physx+px-articulation-motion "%PHYSX")
   (export '%physx::physx+advance-to-index "%PHYSX")
-  (export '%physx::is-kinematic "%PHYSX")
+  (export '%physx::type "%PHYSX")
   (export '%physx::physx+set-target-orientation "%PHYSX")
   (export '%physx::physx+px-cuda-memory-manager "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-articulation-axis+enum+unsigned+char>
           "%PHYSX")
   (export '%physx::physx+copy-internal-state-to-cache "%PHYSX")
   (export '%physx::physx+add-actors "%PHYSX")
+  (export '%physx::is-kinematic "%PHYSX")
   (export '%physx::physx+get-projection-linear-tolerance "%PHYSX")
   (export '%physx::point-stepped "%PHYSX")
   (export '%physx::physx+px-pvd-scene-client "%PHYSX")
-  (export '%physx::type "%PHYSX")
+  (export '%physx::physx+~px-triangle-mesh-cooking-result "%PHYSX")
   (export '%physx::physx+~px-constraint-shader-table "%PHYSX")
   (export '%physx::physx+set-distance-joint-flags "%PHYSX")
   (export '%physx::physx+get-contact-offset "%PHYSX")
@@ -49663,12 +49500,11 @@
   (export '%physx::physx+px-flags<physx+px-material-flag+enum+unsigned+short>+internal-type
           "%PHYSX")
   (export '%physx::physx+get-threshold-long-speed "%PHYSX")
-  (export '%physx::physx+~px-triangle-mesh-cooking-result "%PHYSX")
+  (export '%physx::physx+compute-graph-channel "%PHYSX")
   (export '%physx::physx+get-broad-phase-regions "%PHYSX")
   (export '%physx::physx+px-alloc-id+enum "%PHYSX")
   (export '%physx::c-ucontext "%PHYSX")
   (export '%physx::physx+apply-impulse "%PHYSX")
-  (export '%physx::physx+compute-graph-channel "%PHYSX")
   (export '%physx::physx+~px-joint-actor-index "%PHYSX")
   (export '%physx::physx+dy+articulation-v "%PHYSX")
   (export '%physx::physx+px-trigger-pair "%PHYSX")
@@ -49698,7 +49534,6 @@
   (export '%physx::physx+~px-query-hit "%PHYSX")
   (export '%physx::physx+~px-extended-contact "%PHYSX")
   (export '%physx::physx+~px-hull-polygon "%PHYSX")
-  (export '%physx::%io-lock-t "%PHYSX")
   (export '%physx::physx+pair-found "%PHYSX")
   (export '%physx::physx+get-nb-brake-torque "%PHYSX")
   (export '%physx::physx+px-bit-and-dword "%PHYSX")
@@ -49794,7 +49629,6 @@
   (export '%physx::physx+px-scene-query-cache "%PHYSX")
   (export '%physx::body-a-data-index "%PHYSX")
   (export '%physx::physx+reset-dependencies "%PHYSX")
-  (export '%physx::%%off64-t "%PHYSX")
   (export '%physx::physx+get-links "%PHYSX")
   (export '%physx::solve-hint "%PHYSX")
   (export '%physx::physx+set-plus-infinity "%PHYSX")
@@ -49869,7 +49703,6 @@
   (export '%physx::physx+get-max-impulse "%PHYSX")
   (export '%physx::physx+px-controller-behavior-flag "%PHYSX")
   (export '%physx::physx+px-cos "%PHYSX")
-  (export '%physx::%shortbuf "%PHYSX")
   (export '%physx::physx+set-rigid-dynamic-lock-flags "%PHYSX")
   (export '%physx::physx+get-device "%PHYSX")
   (export '%physx::get-phys-x-gpu-dll-name "%PHYSX")
@@ -49933,8 +49766,6 @@
   (export '%physx::physx+~px-articulation-flag "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-spherical-joint-flag+enum+unsigned+short>
           "%PHYSX")
-  (export '%physx::%wide-data "%PHYSX")
-  (export '%physx::%chain "%PHYSX")
   (export '%physx::physx+px-task "%PHYSX")
   (export '%physx::physx+px-revolute-joint-create "%PHYSX")
   (export '%physx::physx+get-high-forward-speed-sub-step-count
@@ -50040,11 +49871,9 @@
   (export '%physx::physx+get-min-response-threshold "%PHYSX")
   (export '%physx::m-wheel1 "%PHYSX")
   (export '%physx::physx+convert "%PHYSX")
-  (export '%physx::%old-offset "%PHYSX")
   (export '%physx::physx+~px-error-code "%PHYSX")
   (export '%physx::physx+~px-pair-flag "%PHYSX")
   (export '%physx::physx+px-pvd-instrumentation-flag+enum "%PHYSX")
-  (export '%physx::%mode "%PHYSX")
   (export '%physx::physx+px-serialization "%PHYSX")
   (export '%physx::m-title "%PHYSX")
   (export '%physx::physx+px-string-table-ext "%PHYSX")
@@ -50110,6 +49939,7 @@
   (export '%physx::physx+submit-task "%PHYSX")
   (export '%physx::physx+px-type-info<physx+px-spherical-joint>
           "%PHYSX")
+  (export '%physx::+physx+px-inv-pi+ "%PHYSX")
   (export '%physx::physx+transform-transpose "%PHYSX")
   (export '%physx::physx+set-rigid-body-flags "%PHYSX")
   (export '%physx::physx+~px-height-field-tess-flag "%PHYSX")
@@ -50134,7 +49964,6 @@
   (export '%physx::physx+get-nb-wheel-enabled-state "%PHYSX")
   (export '%physx::physx+px-controller-behavior-flags "%PHYSX")
   (export '%physx::physx+zero-cache "%PHYSX")
-  (export '%physx::%io-read-end "%PHYSX")
   (export '%physx::physx+px-cuda-interop-mode "%PHYSX")
   (export '%physx::physx+px-quat "%PHYSX")
   (export '%physx::physx+reserve "%PHYSX")
@@ -50195,7 +50024,6 @@
   (export '%physx::physx+px-joint-actor-index "%PHYSX")
   (export '%physx::physx+px-scene-query-ext+sweep-any "%PHYSX")
   (export '%physx::physx+set-down-ratios "%PHYSX")
-  (export '%physx::%unused2 "%PHYSX")
   (export '%physx::physx+set-report-mode "%PHYSX")
   (export '%physx::physx+set-spherical-joint-flag "%PHYSX")
   (export '%physx::physx+get-visualization-parameter "%PHYSX")
@@ -50206,7 +50034,6 @@
   (export '%physx::m-max-brake-torque "%PHYSX")
   (export '%physx::pos1 "%PHYSX")
   (export '%physx::physx+get-sample "%PHYSX")
-  (export '%physx::%io-read-base "%PHYSX")
   (export '%physx::physx+finalize-query "%PHYSX")
   (export '%physx::physx+set-debug-rendering-flags "%PHYSX")
   (export '%physx::physx+px-rigid-body-ext+add-force-at-pos "%PHYSX")
@@ -50261,7 +50088,6 @@
   (export '%physx::physx+px-foundation "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-distance-joint-flag+enum+unsigned+short>+internal-type
           "%PHYSX")
-  (export '%physx::*physx+px-inv-pi* "%PHYSX")
   (export '%physx::physx+set-drive-target "%PHYSX")
   (export '%physx::sweep-touch-buffer-size "%PHYSX")
   (export '%physx::physx+~px-vehicle-wheels "%PHYSX")
@@ -50346,6 +50172,7 @@
   (export '%physx::mesh-size-performance-trade-off "%PHYSX")
   (export '%physx::physx+start-simulation "%PHYSX")
   (export '%physx::physx+get-rigid-dynamic-lock-flags "%PHYSX")
+  (export '%physx::+physx+px-pi+ "%PHYSX")
   (export '%physx::physx+px-hull-polygon "%PHYSX")
   (export '%physx::physx+get-tangential-damping "%PHYSX")
   (export '%physx::physx+get-material-from-internal-face-index
@@ -50456,7 +50283,6 @@
   (export '%physx::physx+transform "%PHYSX")
   (export '%physx::physx+px-binary-converter "%PHYSX")
   (export '%physx::physx+submitted "%PHYSX")
-  (export '%physx::*physx+px-pi-div-two* "%PHYSX")
   (export '%physx::m-inv-inertia-scale0 "%PHYSX")
   (export '%physx::physx+is-gpu-compatible "%PHYSX")
   (export '%physx::word1 "%PHYSX")
@@ -50494,7 +50320,6 @@
   (export '%physx::physx+front "%PHYSX")
   (export '%physx::physx+set-error-level "%PHYSX")
   (export '%physx::physx+set-min-distance "%PHYSX")
-  (export '%physx::%codecvt "%PHYSX")
   (export '%physx::physx+get-nb-wheel-centre-offset "%PHYSX")
   (export '%physx::physx+px-cooking "%PHYSX")
   (export '%physx::physx+~px-d6joint-drive-flag "%PHYSX")
@@ -50569,7 +50394,7 @@
   (export '%physx::physx+set-step-offset "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-deletion-event-flag+enum+unsigned+char>+internal-type
           "%PHYSX")
-  (export '%physx::force-no-response "%PHYSX")
+  (export '%physx::+physx+no-link+ "%PHYSX")
   (export '%physx::physx+px-material-flag "%PHYSX")
   (export '%physx::physx+fetch-results-finish "%PHYSX")
   (export '%physx::physx+~px-sweep-hit "%PHYSX")
@@ -50629,6 +50454,7 @@
   (export '%physx::user-sweep-result-buffer "%PHYSX")
   (export '%physx::physx+get-solver-iteration-counts "%PHYSX")
   (export '%physx::physx+get-user-data "%PHYSX")
+  (export '%physx::force-no-response "%PHYSX")
   (export '%physx::physx+add-collection "%PHYSX")
   (export '%physx::physx+px-compute-height-field-penetration
           "%PHYSX")
@@ -50696,7 +50522,6 @@
   (export '%physx::physx+px-flags<physx+px-data-access-flag+enum+unsigned+char>+internal-type
           "%PHYSX")
   (export '%physx::physx+submit-unnamed-task "%PHYSX")
-  (export '%physx::%io-write-base "%PHYSX")
   (export '%physx::physx+get-nb-tire-force-app-point-offset "%PHYSX")
   (export '%physx::physx+px-concrete-type "%PHYSX")
   (export '%physx::physx+px-controller-debug-render-flag "%PHYSX")
@@ -50737,19 +50562,18 @@
   (export '%physx::physx+~px-convex-mesh-cooking-type "%PHYSX")
   (export '%physx::physx+get-written-data-size "%PHYSX")
   (export '%physx::physx+get-nb-broad-phase-removes "%PHYSX")
-  (export '%physx::%io-write-end "%PHYSX")
+  (export '%physx::physx+px-flags<physx+px-query-flag+enum+unsigned+short>+internal-type
+          "%PHYSX")
   (export '%physx::physx+px-vehicle-drivable-surface-type "%PHYSX")
   (export '%physx::event-pose "%PHYSX")
   (export '%physx::physx+get-materials "%PHYSX")
   (export '%physx::physx+px-trigger-pair-flags "%PHYSX")
   (export '%physx::physx+pvdsdk+pvd-data-stream "%PHYSX")
   (export '%physx::physx+get-internal-compliance "%PHYSX")
-  (export '%physx::physx+px-flags<physx+px-query-flag+enum+unsigned+short>+internal-type
-          "%PHYSX")
   (export '%physx::physx+px-vehicle-graph-type "%PHYSX")
   (export '%physx::torsional-patch-radius "%PHYSX")
   (export '%physx::physx+get-stabilization-threshold "%PHYSX")
-  (export '%physx::ang-break-force "%PHYSX")
+  (export '%physx::physx+px-cuda-interop-register-flag+enum "%PHYSX")
   (export '%physx::physx+px-actor-type-flag+enum "%PHYSX")
   (export '%physx::internal-flags "%PHYSX")
   (export '%physx::physx+get-nb-non-driven-wheels "%PHYSX")
@@ -50760,17 +50584,16 @@
   (export '%physx::internal-face-index1 "%PHYSX")
   (export '%physx::physx+px-aggregate "%PHYSX")
   (export '%physx::static-structure "%PHYSX")
-  (export '%physx::%vtable-offset "%PHYSX")
+  (export '%physx::physx+px-scene-query-flag "%PHYSX")
   (export '%physx::physx+~px-mesh-overlap-util "%PHYSX")
   (export '%physx::physx+~px-triangle-mesh-desc "%PHYSX")
   (export '%physx::physx+get-dominance-group "%PHYSX")
-  (export '%physx::physx+px-cuda-interop-register-flag+enum "%PHYSX")
+  (export '%physx::ang-break-force "%PHYSX")
   (export '%physx::ccd-max-passes "%PHYSX")
   (export '%physx::physx+px-rigid-static "%PHYSX")
   (export '%physx::physx+get-rb-pair-stats "%PHYSX")
   (export '%physx::physx+get-ptr "%PHYSX")
   (export '%physx::physx+release-cache "%PHYSX")
-  (export '%physx::physx+px-scene-query-flag "%PHYSX")
   (export '%physx::tire-longitudinal-dir "%PHYSX")
   (export '%physx::nb-iterations "%PHYSX")
   (export '%physx::physx+get-nb-anti-roll-bars "%PHYSX")
@@ -50804,17 +50627,14 @@
   (export '%physx::physx+px-rigid-body-ext+compute-linear-angular-impulse
           "%PHYSX")
   (export '%physx::physx+alloc "%PHYSX")
-  (export '%physx::*physx+px-two-pi* "%PHYSX")
   (export '%physx::physx+set-flag "%PHYSX")
   (export '%physx::physx+px-articulation-root-link-data "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-d6joint-drive-flag+enum+unsigned+int>+internal-type
           "%PHYSX")
   (export '%physx::physx+task-completed "%PHYSX")
-  (export '%physx::%lock "%PHYSX")
   (export '%physx::physx+px-hit-flag+enum "%PHYSX")
   (export '%physx::touched-actor "%PHYSX")
   (export '%physx::m-moi "%PHYSX")
-  (export '%physx::%%off-t "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-controller-debug-render-flag+enum+unsigned+int>
           "%PHYSX")
   (export '%physx::physx+px-vehicle-graph-desc "%PHYSX")
@@ -50909,7 +50729,6 @@
   (export '%physx::physx+px-spatial-force "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-mesh-geometry-flag+enum+unsigned+char>
           "%PHYSX")
-  (export '%physx::%io-write-ptr "%PHYSX")
   (export '%physx::max-nb-dynamic-shapes "%PHYSX")
   (export '%physx::nb-discrete-contact-pairs "%PHYSX")
   (export '%physx::physx+px-type-info<physx+px-articulation-joint-reduced-coordinate>+name
@@ -50954,6 +50773,7 @@
           "%PHYSX")
   (export '%physx::physx+px-vehicle-tire-data "%PHYSX")
   (export '%physx::height-scale "%PHYSX")
+  (export '%physx::+physx+px-half-pi+ "%PHYSX")
   (export '%physx::physx+px-modifiable-contact "%PHYSX")
   (export '%physx::physx+px-dominance-group-pair "%PHYSX")
   (export '%physx::physx+~px-friction-type "%PHYSX")
@@ -50975,8 +50795,6 @@
   (export '%physx::physx+set-anti-roll-bar-data "%PHYSX")
   (export '%physx::physx+dot "%PHYSX")
   (export '%physx::physx+force-dynamic-tree-rebuild "%PHYSX")
-  (export '%physx::%io-codecvt "%PHYSX")
-  (export '%physx::%io-save-end "%PHYSX")
   (export '%physx::physx+px-constraint-visualize "%PHYSX")
   (export '%physx::physx+px-controller-shape-type+enum "%PHYSX")
   (export '%physx::physx+get-nb-links "%PHYSX")
@@ -51047,7 +50865,6 @@
   (export '%physx::block "%PHYSX")
   (export '%physx::physx+px-scene-query-ext+raycast-single "%PHYSX")
   (export '%physx::physx+get-behavior-flags "%PHYSX")
-  (export '%physx::*physx+px-default-client* "%PHYSX")
   (export '%physx::physx+~px-contact-pair-flag "%PHYSX")
   (export '%physx::physx+get-nb-actors "%PHYSX")
   (export '%physx::physx+get-world-bounds "%PHYSX")
@@ -51087,10 +50904,11 @@
   (export '%physx::physx+put-to-sleep "%PHYSX")
   (export '%physx::physx+create-client "%PHYSX")
   (export '%physx::physx+set-drive-force-limit "%PHYSX")
+  (export '%physx::+physx+invalid-filter-pair-index+ "%PHYSX")
+  (export '%physx::physx+px-simulation-event-callback "%PHYSX")
+  (export '%physx::physx+on-wake "%PHYSX")
   (export '%physx::physx+set-high-forward-speed-sub-step-count
           "%PHYSX")
-  (export '%physx::max-dynamic-partition "%PHYSX")
-  (export '%physx::physx+on-wake "%PHYSX")
   (export '%physx::physx+get-constraints "%PHYSX")
   (export '%physx::body2world "%PHYSX")
   (export '%physx::physx+remove-obstacle "%PHYSX")
@@ -51102,19 +50920,20 @@
   (export '%physx::physx+get-torsional-patch-radius "%PHYSX")
   (export '%physx::physx+px-deletion-event-flag "%PHYSX")
   (export '%physx::physx+on-contact "%PHYSX")
-  (export '%physx::physx+px-simulation-event-callback "%PHYSX")
+  (export '%physx::physx+~px-alloc-id-stats "%PHYSX")
   (export '%physx::touches "%PHYSX")
   (export '%physx::physx+~px-vehicle-graph-desc "%PHYSX")
   (export '%physx::physx+~px-hit-flag "%PHYSX")
   (export '%physx::physx+px-pair-filtering-mode+enum "%PHYSX")
   (export '%physx::physx+px-extended-vec3 "%PHYSX")
+  (export '%physx::max-dynamic-partition "%PHYSX")
   (export '%physx::physx+get-class-size "%PHYSX")
   (export '%physx::physx+~px-d6drive "%PHYSX")
   (export '%physx::physx+~px-solver-body-data "%PHYSX")
   (export '%physx::physx+px-get-filter-bool "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-pvd-scene-flag+enum+unsigned+char>
           "%PHYSX")
-  (export '%physx::physx+~px-alloc-id-stats "%PHYSX")
+  (export '%physx::physx+~px-vehicle-key-smoothing-data "%PHYSX")
   (export '%physx::physx+get-bounce-threshold "%PHYSX")
   (export '%physx::physx+~px-triangle "%PHYSX")
   (export '%physx::physx+px-vehicle-drivable-surface-to-tire-friction-pairs
@@ -51137,8 +50956,6 @@
   (export '%physx::body-data0 "%PHYSX")
   (export '%physx::physx+px-deletion-listener "%PHYSX")
   (export '%physx::m-rear-bias "%PHYSX")
-  (export '%physx::physx+~px-vehicle-key-smoothing-data "%PHYSX")
-  (export '%physx::*physx+invalid-filter-pair-index* "%PHYSX")
   (export '%physx::m-peak-torque "%PHYSX")
   (export '%physx::physx+set-scene-query-filter-data "%PHYSX")
   (export '%physx::physx+~px-alloc-id "%PHYSX")
@@ -51263,6 +51080,8 @@
   (export '%physx::physx+get-internal-face-indices "%PHYSX")
   (export '%physx::has-max-impulse "%PHYSX")
   (export '%physx::physx+px-articulation-joint-type "%PHYSX")
+  (export '%physx::+physx+px-two-pi+ "%PHYSX")
+  (export '%physx::+physx+px-default-client+ "%PHYSX")
   (export '%physx::physx+px-rigid-dynamic "%PHYSX")
   (export '%physx::physx+execute "%PHYSX")
   (export '%physx::quantized-count "%PHYSX")
@@ -51276,7 +51095,7 @@
   (export '%physx::physx+set-friction-combine-mode "%PHYSX")
   (export '%physx::physx+operator^= "%PHYSX")
   (export '%physx::physx+px-type-info<physx+px-rigid-actor> "%PHYSX")
-  (export '%physx::physx+on-origin-shift "%PHYSX")
+  (export '%physx::+physx+px-pi-div-two+ "%PHYSX")
   (export '%physx::m-color-high "%PHYSX")
   (export '%physx::mesh-flags "%PHYSX")
   (export '%physx::px-create-physics "%PHYSX")
@@ -51290,8 +51109,8 @@
   (export '%physx::physx+px-vehicle-suspension-sweeps "%PHYSX")
   (export '%physx::physx+get-cuda-memory-manager "%PHYSX")
   (export '%physx::target-vel "%PHYSX")
-  (export '%physx::%freeres-list "%PHYSX")
   (export '%physx::physx+get-conjugate "%PHYSX")
+  (export '%physx::physx+on-origin-shift "%PHYSX")
   (export '%physx::physx+px-input-stream "%PHYSX")
   (export '%physx::physx+~px-controllers-hit "%PHYSX")
   (export '%physx::external-forces "%PHYSX")
@@ -51311,7 +51130,6 @@
   (export '%physx::physx+px-sweep-query-result "%PHYSX")
   (export '%physx::physx+px-joint-concrete-type+enum "%PHYSX")
   (export '%physx::physx+~px-filter-op "%PHYSX")
-  (export '%physx::%io-save-base "%PHYSX")
   (export '%physx::physx+compute-joint-force "%PHYSX")
   (export '%physx::physx+px-geometry-holder "%PHYSX")
   (export '%physx::physx+px-type-info<physx+px-rigid-static>
@@ -51330,7 +51148,6 @@
   (export '%physx::physx+px-simulation-statistics+rb-pair-stats-type
           "%PHYSX")
   (export '%physx::physx+set-max-distance "%PHYSX")
-  (export '%physx::*physx+px-pi* "%PHYSX")
   (export '%physx::physx+~px-height-field-desc "%PHYSX")
   (export '%physx::physx+px-contact-stream-iterator "%PHYSX")
   (export '%physx::world-ang-vel "%PHYSX")
@@ -51418,7 +51235,7 @@
   (export '%physx::num-friction-patches "%PHYSX")
   (export '%physx::physx+on-object-out-of-bounds "%PHYSX")
   (export '%physx::uint8-t "%PHYSX")
-  (export '%physx::physx+get-max-contact-impulse "%PHYSX")
+  (export '%physx::+physx+px-max-clients+ "%PHYSX")
   (export '%physx::mesh-weld-tolerance "%PHYSX")
   (export '%physx::stride "%PHYSX")
   (export '%physx::found-lost-pairs-capacity "%PHYSX")
@@ -51430,7 +51247,7 @@
   (export '%physx::broad-phase-type "%PHYSX")
   (export '%physx::physx+px-convex-flags "%PHYSX")
   (export '%physx::physx+is-bit-set "%PHYSX")
-  (export '%physx::delta-ang-dt "%PHYSX")
+  (export '%physx::has-force-thresholds "%PHYSX")
   (export '%physx::physx+px-vehicle-set-basis-vectors "%PHYSX")
   (export '%physx::physx+get-ccd-max-passes "%PHYSX")
   (export '%physx::physx+set-drive-type "%PHYSX")
@@ -51456,12 +51273,10 @@
   (export '%physx::physx+set-global-pose "%PHYSX")
   (export '%physx::physx+create-material "%PHYSX")
   (export '%physx::physx+px-assert-handler "%PHYSX")
-  (export '%physx::%io-read-ptr "%PHYSX")
-  (export '%physx::%io-backup-base "%PHYSX")
   (export '%physx::physx+set-projection-angular-tolerance "%PHYSX")
   (export '%physx::physx+get-wheel-data "%PHYSX")
   (export '%physx::physx+~px-light-cpu-task "%PHYSX")
-  (export '%physx::has-force-thresholds "%PHYSX")
+  (export '%physx::physx+px-vehicle-concrete-type+enum "%PHYSX")
   (export '%physx::m-max-filtered-normalised-load "%PHYSX")
   (export '%physx::maximum "%PHYSX")
   (export '%physx::nb-discrete-contact-pairs-total "%PHYSX")
@@ -51470,7 +51285,6 @@
           "%PHYSX")
   (export '%physx::physx+pair-lost "%PHYSX")
   (export '%physx::physx+~px-vec3 "%PHYSX")
-  (export '%physx::physx+px-vehicle-concrete-type+enum "%PHYSX")
   (export '%physx::target-velocity "%PHYSX")
   (export '%physx::upper "%PHYSX")
   (export '%physx::physx+compute-jacobians "%PHYSX")
@@ -51482,7 +51296,6 @@
   (export '%physx::physx+set-params "%PHYSX")
   (export '%physx::physx+create-scene "%PHYSX")
   (export '%physx::user-raycast-result-buffer "%PHYSX")
-  (export '%physx::%flags "%PHYSX")
   (export '%physx::physx+px-constraint-project "%PHYSX")
   (export '%physx::physx+get-contact "%PHYSX")
   (export '%physx::constraint-type "%PHYSX")
@@ -51500,6 +51313,7 @@
   (export '%physx::physx+get-shapes "%PHYSX")
   (export '%physx::m-color-low "%PHYSX")
   (export '%physx::physx+get-min-ccd-advance-coefficient "%PHYSX")
+  (export '%physx::physx+get-max-contact-impulse "%PHYSX")
   (export '%physx::register-deletion-listener "%PHYSX")
   (export '%physx::physx+create-articulation-joint "%PHYSX")
   (export '%physx::physx+px-vehicle-update-mode+enum "%PHYSX")
@@ -51548,7 +51362,7 @@
   (export '%physx::half-height "%PHYSX")
   (export '%physx::physx+px-articulation-drive-type+enum "%PHYSX")
   (export '%physx::physx+set-parent-pose "%PHYSX")
-  (export '%physx::physx+px-type-info<physx+px-convex-mesh> "%PHYSX")
+  (export '%physx::delta-ang-dt "%PHYSX")
   (export '%physx::pos2 "%PHYSX")
   (export '%physx::physx+has-next-patch "%PHYSX")
   (export '%physx::physx+get-friction-offset-threshold "%PHYSX")
@@ -51563,7 +51377,7 @@
   (export '%physx::pre-filter-shader "%PHYSX")
   (export '%physx::physx+set-min-torsional-patch-radius "%PHYSX")
   (export '%physx::physx+is-set "%PHYSX")
-  (export '%physx::m-spring-damper-rate "%PHYSX")
+  (export '%physx::physx+px-type-info<physx+px-convex-mesh> "%PHYSX")
   (export '%physx::physx+px-type-info<physx+px-articulation-reduced-coordinate>
           "%PHYSX")
   (export '%physx::nb-full-updates "%PHYSX")
@@ -51587,16 +51401,16 @@
   (export '%physx::physx+px-rigid-body-ext+get-local-velocity-at-local-pos
           "%PHYSX")
   (export '%physx::physx+validate-triangle-mesh "%PHYSX")
-  (export '%physx::physx+px-flags<physx+px-articulation-cache+enum+unsigned+char>+internal-type
-          "%PHYSX")
+  (export '%physx::m-spring-damper-rate "%PHYSX")
   (export '%physx::physx+find "%PHYSX")
   (export '%physx::physx+compute-generalized-external-force "%PHYSX")
   (export '%physx::physx+px-sin "%PHYSX")
   (export '%physx::physx+px-i64 "%PHYSX")
   (export '%physx::physx+create-controller "%PHYSX")
   (export '%physx::m-radius "%PHYSX")
+  (export '%physx::physx+px-flags<physx+px-articulation-cache+enum+unsigned+char>+internal-type
+          "%PHYSX")
   (export '%physx::physx+set-materials "%PHYSX")
-  (export '%physx::%io-marker "%PHYSX")
   (export '%physx::physx+px-articulation-reduced-coordinate "%PHYSX")
   (export '%physx::physx+get-wheel-rotation-angle "%PHYSX")
   (export '%physx::physx+set-contact-offset "%PHYSX")
@@ -51612,7 +51426,7 @@
   (export '%physx::physx+px-rigid-actor-ext+get-rigid-actor-shape-local-bounds-list
           "%PHYSX")
   (export '%physx::px-create-rep-x-object "%PHYSX")
-  (export '%physx::m-lat-stiff-x "%PHYSX")
+  (export '%physx::+physx+px-inv-two-pi+ "%PHYSX")
   (export '%physx::physx+px-error-callback "%PHYSX")
   (export '%physx::step-offset "%PHYSX")
   (export '%physx::physx+set-wheel-rotation-angle "%PHYSX")
@@ -51622,6 +51436,7 @@
   (export '%physx::joint-acceleration "%PHYSX")
   (export '%physx::physx+get-non-walkable-mode "%PHYSX")
   (export '%physx::physx+set-revolute-joint-flag "%PHYSX")
+  (export '%physx::m-lat-stiff-x "%PHYSX")
   (export '%physx::physx+get-inv-mass-scale0 "%PHYSX")
   (export '%physx::physx+px-vehicle-no-drive+create "%PHYSX")
   (export '%physx::physx+get-interop-mode "%PHYSX")
@@ -51658,7 +51473,6 @@
   (export '%physx::body1tx-i "%PHYSX")
   (export '%physx::physx+obstacle-handle "%PHYSX")
   (export '%physx::patch-stream-size "%PHYSX")
-  (export '%physx::*physx+px-pi-div-four* "%PHYSX")
   (export '%physx::physx+px-type-info<physx+px-articulation-link>
           "%PHYSX")
   (export '%physx::physx+set-wheel-shape-mapping "%PHYSX")
@@ -51701,7 +51515,6 @@
   (export '%physx::color "%PHYSX")
   (export '%physx::physx+px-vehicle-update-mode "%PHYSX")
   (export '%physx::physx+~px-spring "%PHYSX")
-  (export '%physx::%%pad5 "%PHYSX")
   (export '%physx::physx+px-simulation-statistics "%PHYSX")
   (export '%physx::physx+px-actor-flags "%PHYSX")
   (export '%physx::physx+get-min-long-slip-denominator "%PHYSX")
@@ -51716,7 +51529,6 @@
   (export '%physx::p "%PHYSX")
   (export '%physx::physx+~px-controller-collision-flag "%PHYSX")
   (export '%physx::physx+get-alloc-name "%PHYSX")
-  (export '%physx::%markers "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-base-flag+enum+unsigned+short>+internal-type
           "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-hit-flag+enum+unsigned+short>
@@ -51756,7 +51568,6 @@
   (export '%physx::physx+px-triangle-mesh-cooking-result "%PHYSX")
   (export '%physx::physx+set-internal-drive-iterations "%PHYSX")
   (export '%physx::physx+get-bounds "%PHYSX")
-  (export '%physx::%io-buf-end "%PHYSX")
   (export '%physx::physx+px-flags<physx+px1d-constraint-flag+type+unsigned+short>
           "%PHYSX")
   (export '%physx::physx+px-converter-report-mode+enum "%PHYSX")
@@ -51771,7 +51582,6 @@
   (export '%physx::physx+px-get-group "%PHYSX")
   (export '%physx::physx+get-internal-face-index0 "%PHYSX")
   (export '%physx::physx+px-contact-pair-index "%PHYSX")
-  (export '%physx::%fileno "%PHYSX")
   (export '%physx::physx+set-cpu-dispatcher "%PHYSX")
   (export '%physx::physx+px-query-filter-callback "%PHYSX")
   (export '%physx::physx+px-base-flag+enum "%PHYSX")
@@ -51802,7 +51612,6 @@
   (export '%physx::m-half-height "%PHYSX")
   (export '%physx::physx+px-rigid-dynamic-lock-flag+enum "%PHYSX")
   (export '%physx::|PHYSX+OPERATOR()| "%PHYSX")
-  (export '%physx::*physx+px-inv-two-pi* "%PHYSX")
   (export '%physx::physx+release-context "%PHYSX")
   (export '%physx::mesh-cooking-hint "%PHYSX")
   (export '%physx::physx+cross "%PHYSX")
@@ -51817,20 +51626,19 @@
   (export '%physx::physx+px-default-allocator "%PHYSX")
   (export '%physx::physx+px-serialization+px-xml-misc-parameter
           "%PHYSX")
-  (export '%physx::ctx "%PHYSX")
+  (export '%physx::physx+px-overlap-hit "%PHYSX")
   (export '%physx::triangle-mesh "%PHYSX")
   (export '%physx::physx+~px-hit-buffer "%PHYSX")
   (export '%physx::physx+~px-debug-color "%PHYSX")
   (export '%physx::physx+~px-triangle-mesh-flag "%PHYSX")
   (export '%physx::physx+get-data-access-flags "%PHYSX")
-  (export '%physx::physx+px-overlap-hit "%PHYSX")
+  (export '%physx::physx+px-light-cpu-task "%PHYSX")
   (export '%physx::physx+px-flags<physx+px-revolute-joint-flag+enum+unsigned+short>+internal-type
           "%PHYSX")
   (export '%physx::offset-size "%PHYSX")
   (export '%physx::physx+get-y-val "%PHYSX")
   (export '%physx::physx+px-serialization+create-binary-converter
           "%PHYSX")
-  (export '%physx::*physx+px-max-clients* "%PHYSX")
   (export '%physx::lambda "%PHYSX")
   (export '%physx::physx+scale-safe "%PHYSX")
   (export '%physx::physx+get-recip-max-compression "%PHYSX")
@@ -51871,6 +51679,5 @@
   (export '%physx::node-index "%PHYSX")
   (export '%physx::max-impulse "%PHYSX")
   (export '%physx::physx+set-drive-position "%PHYSX")
-  (export '%physx::physx+px-light-cpu-task "%PHYSX")
   (export '%physx::physx+px-spatial-velocity "%PHYSX"))
 

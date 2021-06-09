@@ -60,11 +60,16 @@ function build_android {
 }
 
 function build_desktop {
-    cd $LIBRARY_DIR/physx/ && ./generate_projects.sh linux
+    cd $LIBRARY_DIR/physx/ && ./generate_projects.sh linux && \
+        cd $LIBRARY_DIR/physx/compiler/linux-release/ && cmake --build .
+
     mkdir -p $BUILD_DIR && cd $BUILD_DIR
     cmake $WORK_DIR
     cmake --build .
 }
+
+CMAKE_PX_BUILDPUBLICSAMPLES=OFF
+CMAKE_PX_BUILDSNIPPETS=OFF
 
 case "$REST_ARGS" in
     desktop)

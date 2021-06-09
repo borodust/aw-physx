@@ -38,7 +38,8 @@ target_include_directories(${TARGET}
 target_compile_options(${TARGET} PUBLIC -Wno-narrowing)
 
 target_link_directories(${TARGET}
-  PRIVATE ${LIBRARY_DIR}/physx/bin/linux.clang/release/)
+  PRIVATE ${LIBRARY_DIR}/physx/bin/linux.clang/release/
+  PRIVATE ${LIBRARY_DIR}/physx/bin/linux.clang/debug/)
 
 target_link_libraries(${TARGET}
   PRIVATE PhysXExtensions_static_64
