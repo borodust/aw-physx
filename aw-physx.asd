@@ -1,13 +1,13 @@
-(asdf:defsystem :claw-physx
+(asdf:defsystem :aw-physx
   :description "Wrapper over physx rendering engine"
   :version "1.0.0"
   :author "Pavel Korolev"
   :mailto "dev@borodust.org"
   :license "MIT"
-  :depends-on (:claw-physx-bindings))
+  :depends-on (:aw-physx-bindings))
 
 
-(asdf:defsystem :claw-physx/wrapper
+(asdf:defsystem :aw-physx/wrapper
   :description "Wrapper over physx rendering engine"
   :version "1.0.0"
   :author "Pavel Korolev"
@@ -22,13 +22,13 @@
                (:module :physx-includes :pathname "lib/physx/physx/include/")))
 
 
-(asdf:defsystem :claw-physx/example
+(asdf:defsystem :aw-physx/example
   :description ""
   :version "1.0.0"
   :author "Pavel Korolev"
   :mailto "dev@borodust.org"
   :license "MIT"
-  :depends-on (:claw-physx)
+  :depends-on (:aw-physx)
   :serial t
   :pathname "example/"
   :components ((:file "example")))
