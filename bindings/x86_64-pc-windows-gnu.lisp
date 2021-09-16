@@ -4859,19 +4859,19 @@
                %physx::physx+px-vehicle-wheels-sim-flag+enum))
 
 (iffi:defitype %physx::size-t
-               :unsigned-long
+               :unsigned-long-long
                "/usr/lib/clang/12.0.1/include/stddef.h:46:23")
 
-(iffi:defifun ("__claw__ZN5physx20platformAlignedAllocEm"
+(iffi:defifun ("__claw__ZN5physx20platformAlignedAllocEy"
                %physx::physx+platform-aligned-alloc)
               (claw-utils:claw-pointer :void)
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:64:23"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:54:23"
               (%physx::size %physx::size-t))
 
 (iffi:defifun ("__claw__ZN5physx19platformAlignedFreeEPv"
                %physx::physx+platform-aligned-free)
               :void
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:69:22"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:59:22"
               (%physx::ptr (claw-utils:claw-pointer :void)))
 
 (iffi:defitype %physx::physx+px-extended
@@ -5019,19 +5019,19 @@
 (iffi:defifun ("__claw__ZN5physx10intrinsics3absEf"
                %physx::physx+intrinsics+abs)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:56:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:51:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics3cosEf"
                %physx::physx+intrinsics+cos)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:109:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:105:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics4fselEfff"
                %physx::physx+intrinsics+fsel)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:62:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:57:40"
               (%physx::a :float)
               (%physx::b :float)
               (%physx::c :float))
@@ -5039,19 +5039,19 @@
 (iffi:defifun ("__claw__ZN5physx10intrinsics8isFiniteEd"
                %physx::physx+intrinsics+is-finite)
               :bool
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:136:39"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:133:39"
               (%physx::a :double))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics8isFiniteEf"
                %physx::physx+intrinsics+is-finite)
               :bool
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:127:39"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:123:39"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics7memCopyEPvPKvj"
                %physx::physx+intrinsics+mem-copy)
               (claw-utils:claw-pointer :void)
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:160:23"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:161:23"
               (%physx::dest (claw-utils:claw-pointer :void))
               (%physx::src (claw-utils:claw-pointer :void))
               (%physx::count %physx::uint32-t))
@@ -5059,7 +5059,7 @@
 (iffi:defifun ("__claw__ZN5physx10intrinsics7memMoveEPvPKvj"
                %physx::physx+intrinsics+mem-move)
               (claw-utils:claw-pointer :void)
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:168:23"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:169:23"
               (%physx::dest (claw-utils:claw-pointer :void))
               (%physx::src (claw-utils:claw-pointer :void))
               (%physx::count %physx::uint32-t))
@@ -5067,7 +5067,7 @@
 (iffi:defifun ("__claw__ZN5physx10intrinsics6memSetEPvij"
                %physx::physx+intrinsics+mem-set)
               (claw-utils:claw-pointer :void)
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:152:23"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:153:23"
               (%physx::dest (claw-utils:claw-pointer :void))
               (%physx::c %physx::int32-t)
               (%physx::count %physx::uint32-t))
@@ -5075,71 +5075,71 @@
 (iffi:defifun ("__claw__ZN5physx10intrinsics7memZeroEPvj"
                %physx::physx+intrinsics+mem-zero)
               (claw-utils:claw-pointer :void)
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:144:23"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:145:23"
               (%physx::dest (claw-utils:claw-pointer :void))
               (%physx::count %physx::uint32-t))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics10memZero128EPvj"
                %physx::physx+intrinsics+mem-zero128)
               :void
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:176:22"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:177:22"
               (%physx::dest (claw-utils:claw-pointer :void))
               (%physx::offset %physx::uint32-t))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics5recipEf"
                %physx::physx+intrinsics+recip)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:74:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:69:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics9recipFastEf"
                %physx::physx+intrinsics+recip-fast)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:80:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:75:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics9recipSqrtEf"
                %physx::physx+intrinsics+recip-sqrt)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:92:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:87:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics13recipSqrtFastEf"
                %physx::physx+intrinsics+recip-sqrt-fast)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:97:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:93:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics9selectMaxEff"
                %physx::physx+intrinsics+select-max)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:121:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:117:40"
               (%physx::a :float)
               (%physx::b :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics9selectMinEff"
                %physx::physx+intrinsics+select-min)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:115:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:111:40"
               (%physx::a :float)
               (%physx::b :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics4signEf"
                %physx::physx+intrinsics+sign)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:68:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:63:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics3sinEf"
                %physx::physx+intrinsics+sin)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:103:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:99:40"
               (%physx::a :float))
 
 (iffi:defifun ("__claw__ZN5physx10intrinsics4sqrtEf"
                %physx::physx+intrinsics+sqrt)
               :float
-              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/unix/PxUnixIntrinsics.h:86:40"
+              "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/windows/PxWindowsIntrinsics.h:81:40"
               (%physx::a :float))
 
 (iffi:deficlass (%physx::physx+pvdsdk+pvd-client :size-reporter nil
@@ -5829,7 +5829,7 @@
               (%physx::%%claw-this-
                (claw-utils:claw-pointer %physx::physx+px-alloc-info)))
 
-(iffi:defifun ("__claw__ZN5physx19PxAllocatorCallback8allocateEmPKcS2_i"
+(iffi:defifun ("__claw__ZN5physx19PxAllocatorCallback8allocateEyPKcS2_i"
                %physx::physx+allocate)
               (claw-utils:claw-pointer :void)
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/PxAllocatorCallback.h:77:16"
@@ -14810,7 +14810,7 @@
                 %physx::physx+px-cuda-buffer)))
 
 (iffi:defitype %physx::physx+px-cuda-buffer-ptr
-               :unsigned-long
+               :unsigned-long-long
                "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:149:16")
 
 (iffi:defifun ("__claw__ZNK5physx12PxCudaBuffer6getPtrEv"
@@ -14877,7 +14877,7 @@
                (claw-utils:claw-pointer
                 %physx::physx+px-cuda-buffer)))
 
-(iffi:defifun ("__claw__ZN5physx12PxCudaBuffer7reallocEmPKciS2_NS_9PxAllocId4EnumE"
+(iffi:defifun ("__claw__ZN5physx12PxCudaBuffer7reallocEyPKciS2_NS_9PxAllocId4EnumE"
                %physx::physx+realloc)
               :bool
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:209:20"
@@ -15357,7 +15357,7 @@
                (claw-utils:claw-pointer
                 %physx::physx+px-cuda-interop-register-flag)))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager5allocENS_23PxCudaBufferMemorySpace4EnumEmPKciS4_NS_9PxAllocId4EnumE"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager5allocENS_23PxCudaBufferMemorySpace4EnumEyPKciS4_NS_9PxAllocId4EnumE"
                %physx::physx+alloc)
               %physx::physx+px-cuda-buffer-ptr
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:234:29"
@@ -15372,7 +15372,7 @@
               (%physx::alloc-name claw-utils:claw-string)
               (%physx::alloc-id %physx::physx+px-alloc-id+enum))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager5allocERKNS_16PxCudaBufferTypeEmPKciS5_NS_9PxAllocId4EnumE"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager5allocERKNS_16PxCudaBufferTypeEyPKciS5_NS_9PxAllocId4EnumE"
                %physx::physx+alloc)
               (claw-utils:claw-pointer %physx::physx+px-cuda-buffer)
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:231:27"
@@ -15388,7 +15388,7 @@
               (%physx::alloc-name claw-utils:claw-string)
               (%physx::alloc-id %physx::physx+px-alloc-id+enum))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager4freeENS_23PxCudaBufferMemorySpace4EnumEm"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager4freeENS_23PxCudaBufferMemorySpace4EnumEy"
                %physx::physx+free)
               :bool
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:237:20"
@@ -15410,7 +15410,7 @@
                (claw-utils:claw-pointer
                 %physx::physx+px-cuda-buffer-type)))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager18getMappedPinnedPtrEm"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager18getMappedPinnedPtrEy"
                %physx::physx+get-mapped-pinned-ptr)
               %physx::physx+px-cuda-buffer-ptr
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:268:29"
@@ -15492,7 +15492,7 @@
                (claw-utils:claw-pointer
                 %physx::physx+px-cuda-memory-manager-stats)))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager7reallocENS_23PxCudaBufferMemorySpace4EnumEmmPKciS4_NS_9PxAllocId4EnumE"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager7reallocENS_23PxCudaBufferMemorySpace4EnumEyyPKciS4_NS_9PxAllocId4EnumE"
                %physx::physx+realloc)
               :bool
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:240:20"
@@ -15508,7 +15508,7 @@
               (%physx::alloc-name claw-utils:claw-string)
               (%physx::alloc-id %physx::physx+px-alloc-id+enum))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager7reserveERKNS_16PxCudaBufferTypeEm"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager7reserveERKNS_16PxCudaBufferTypeEy"
                %physx::physx+reserve)
               :bool
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:247:20"
@@ -15520,7 +15520,7 @@
                 %physx::physx+px-cuda-buffer-type))
               (%physx::size %physx::size-t))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager16setMaxMemorySizeERKNS_16PxCudaBufferTypeEm"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager16setMaxMemorySizeERKNS_16PxCudaBufferTypeEy"
                %physx::physx+set-max-memory-size)
               :bool
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:256:20"
@@ -15532,7 +15532,7 @@
                 %physx::physx+px-cuda-buffer-type))
               (%physx::size %physx::size-t))
 
-(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager11setPageSizeERKNS_16PxCudaBufferTypeEm"
+(iffi:defifun ("__claw__ZN5physx19PxCudaMemoryManager11setPageSizeERKNS_16PxCudaBufferTypeEy"
                %physx::physx+set-page-size)
               :bool
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/cudamanager/PxCudaMemoryManager.h:252:20"
@@ -16413,7 +16413,7 @@
                 nil
                 "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:89:7")
 
-(iffi:defifun ("__claw__ZN5physx18PxDefaultAllocator8allocateEmPKcS2_i"
+(iffi:defifun ("__claw__ZN5physx18PxDefaultAllocator8allocateEyPKcS2_i"
                %physx::physx+allocate)
               (claw-utils:claw-pointer :void)
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/extensions/PxDefaultAllocator.h:92:8"
@@ -16840,7 +16840,7 @@
               (%physx::name
                (claw-utils:claw-pointer claw-utils:claw-string)))
 
-(iffi:defifun ("__claw__ZNK5physx24PxDeserializationContext16resolveReferenceEjm"
+(iffi:defifun ("__claw__ZNK5physx24PxDeserializationContext16resolveReferenceEjy"
                %physx::physx+resolve-reference :non-mutating t)
               (claw-utils:claw-pointer %physx::physx+px-base)
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/common/PxSerialFramework.h:196:21"
@@ -42278,7 +42278,7 @@
                (claw-utils:claw-pointer
                 %physx::physx+px-serialization-context)))
 
-(iffi:defifun ("__claw__ZN5physx22PxSerializationContext17registerReferenceERNS_6PxBaseEjm"
+(iffi:defifun ("__claw__ZN5physx22PxSerializationContext17registerReferenceERNS_6PxBaseEjy"
                %physx::physx+register-reference)
               :void
               "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/common/PxSerialFramework.h:124:18"
@@ -50957,7 +50957,7 @@
                "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/PxFlags.h:76:22")
 
 (iffi:defitype %physx::px-compile-time-assert-dummy
-               claw-utils:claw-string
+               :int
                "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/PxPreprocessor.h:496:1")
 
 (iffi:defitype %physx::physx+px-overlap-buffer
@@ -50989,7 +50989,7 @@
                "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/pxshared/include/foundation/PxSimpleTypes.h:74:16")
 
 (iffi:defitype %physx::physx+dy+articulation-link-handle
-               :unsigned-long
+               :unsigned-long-long
                "/home/borodust/devel/repo/aw-projects/aw-physx/src/lib/physx/physx/include/solver/PxSolverDefs.h:55:17")
 
 (iffi:defitype %physx::physx+px-articulation-motions

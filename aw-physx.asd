@@ -15,11 +15,9 @@
   :license "MIT"
   :depends-on (:alexandria :cffi :cffi-c-ref :claw :claw-utils)
   :serial t
-  :pathname "src/"
-  :components ((:file "claw")
-               (:module :bindings)
-               (:module :physx-shared-includes :pathname "lib/physx/pxshared/include/")
-               (:module :physx-includes :pathname "lib/physx/physx/include/")))
+  :components ((:file "src/claw")
+               (:module :physx-shared-includes :pathname "src/lib/physx/pxshared/include/")
+               (:module :physx-includes :pathname "src/lib/physx/physx/include/")))
 
 
 (asdf:defsystem :aw-physx/example
