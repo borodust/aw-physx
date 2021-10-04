@@ -61,14 +61,14 @@ function build_android {
 
 function build_desktop {
     cd $LIBRARY_DIR/physx/ && ./generate_projects.sh linux && \
-        cd $LIBRARY_DIR/physx/compiler/linux-release/ && cmake --build .
+        cd $LIBRARY_DIR/physx/compiler/linux-release/ && cmake --build . --config release
 
     mkdir -p $BUILD_DIR && cd $BUILD_DIR
     cmake -DCMAKE_C_COMPILER=clang \
           -DCMAKE_CXX_COMPILER=clang++ \
           -DCMAKE_SHARED_LINKER_FLAGS="-stdlib=libc++ -lc++abi" \
           $WORK_DIR
-    cmake --build .
+    cmake --build . --config "MinSizeRel"
 }
 
 CMAKE_PX_BUILDPUBLICSAMPLES=OFF

@@ -6,8 +6,9 @@
 
 (claw.wrapper:defwrapper (:aw-physx
                           (:system :aw-physx/wrapper)
-                          (:headers "PxPhysicsAPI.h")
                           (:defines "_DEBUG" 1)
+                          (:headers "PxConfig.h"
+                                    "PxPhysicsAPI.h")
                           (:includes :physx-shared-includes :physx-includes)
                           (:targets ((:and :x86-64 :linux) "x86_64-pc-linux-gnu")
                                     ((:and :aarch64 :android) "aarch64-linux-android")
@@ -16,7 +17,9 @@
                           (:language :c++)
                           (:include-definitions "^physx::.*" "^Px.*")
                           (:exclude-definitions "physx::PxVehicleDrive"
-                                                "physx::PxRepXInstantiationArgs"))
+                                                "physx::PxRepXInstantiationArgs"
+                                                "__"
+                                                "^_"))
   :in-package :%physx
   :trim-enum-prefix t
   :recognize-bitfields t
