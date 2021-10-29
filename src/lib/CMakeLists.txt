@@ -11,7 +11,7 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 set(CMAKE_INSTALL_RPATH "$\{ORIGIN\}")
 
 if (MSVC)
-    set(TARGET_TRIPLE x86_64-pc-windows-gnu)
+    set(TARGET_TRIPLE x86_64-w64-mingw32)
     if (NOT ANDROID_ABI)
       add_compile_options(/arch:AVX)
     endif()
@@ -23,7 +23,7 @@ else()
       add_compile_options(-mavx)
     else()
       set(TARGET_TRIPLE aarch64-linux-android)
-      add_compile_options(-mfpu=neon)
+      add_link_options(-Wl,--strip-debug)
     endif()
 endif()
 
@@ -47,15 +47,33 @@ target_compile_options(${TARGET} PUBLIC "${CLAWED_COMPILE_OPTIONS}")
 target_link_directories(${TARGET}
   PRIVATE "${LIBRARY_DIR}/physx/bin/linux.clang/release/"
   PRIVATE "${LIBRARY_DIR}/physx/bin/linux.clang/debug/"
+  PRIVATE "${LIBRARY_DIR}/physx/bin/android.arm64-v8a.fp-soft/release/"
+  PRIVATE "${LIBRARY_DIR}/physx/bin/android.arm64-v8a.fp-soft/debug/"
   PRIVATE "${LIBRARY_DIR}/physx/bin/win.x86_64.vc142.md/release/"
   PRIVATE "${LIBRARY_DIR}/physx/bin/win.x86_64.vc142.md/debug/")
 
-target_link_libraries(${TARGET}
-  PRIVATE PhysXExtensions_static_64
-  PhysX_static_64
-  PhysXPvdSDK_static_64
-  PhysXVehicle_static_64
-  PhysXCharacterKinematic_static_64
-  PhysXCooking_static_64
-  PhysXCommon_static_64
-  PhysXFoundation_static_64)
+
+if(NOT ANDROID_ABI)
+  target_link_libraries(${TARGET}
+    PRIVATE PhysXExtensions_static_64
+    PRIVATE PhysX_static_64
+    PRIVATE PhysXPvdSDK_static_64
+    PRIVATE PhysXVehicle_static_64
+    PRIVATE PhysXCharacterKinematic_static_64
+    PRIVATE PhysXCooking_static_64
+    PRIVATE PhysXCommon_static_64
+    PRIVATE PhysXFoundation_static_64)
+else()
+  find_library (ANDROID_LOG_LIB log)
+
+  target_link_libraries(${TARGET}
+    PRIVATE PhysXExtensions_static
+    PRIVATE PhysX_static
+    PRIVATE PhysXPvdSDK_static
+    PRIVATE PhysXVehicle_static
+    PRIVATE PhysXCharacterKinematic_static
+    PRIVATE PhysXCooking_static
+    PRIVATE PhysXCommon_static
+    PRIVATE PhysXFoundation_static
+    PRIVATE ${ANDROID_LOG_LIB})
+endif()

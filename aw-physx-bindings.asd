@@ -10,5 +10,5 @@
     (:and :x86-64 :linux))
    (:file "bindings/aarch64-linux-android" :if-feature
     (:and :aarch64 :android))
-   (:file "bindings/x86_64-pc-windows-gnu" :if-feature
+   (:file "bindings/x86_64-w64-mingw32" :if-feature
     (:and :x86-64 :windows))))

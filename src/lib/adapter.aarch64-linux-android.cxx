@@ -4,7 +4,7 @@
 #include <new>
 #endif
 
-
+#define NDEBUG 1
 
 #include "PxConfig.h"
 #include "PxPhysicsAPI.h"
