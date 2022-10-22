@@ -1,3 +1,3 @@
-# claw-physx
+# AW-PHYSX
 
-Work in progress playground for `:claw` `C++` generator.
+Bindings to [PhysX](https://github.com/NVIDIAGameWorks/PhysX) physics simulation library.

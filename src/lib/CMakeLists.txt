@@ -3,7 +3,6 @@ project(physx.clawed)
 
 set(LIBRARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/physx)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
 
 # setup rpath
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
@@ -12,6 +11,13 @@ set(CMAKE_INSTALL_RPATH "$\{ORIGIN\}")
 
 if (MSVC)
     set(TARGET_TRIPLE x86_64-w64-mingw32)
+
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+      set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDebugDLL)
+    elseif()
+      set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
+    endif()
+
     if (NOT ANDROID_ABI)
       add_compile_options(/arch:AVX)
     endif()
